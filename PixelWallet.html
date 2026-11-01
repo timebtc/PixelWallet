@@ -1,0 +1,2627 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'wasm-unsafe-eval' 'sha256-WfXU22WH81/km7tJyACEjyHOzzs21XG8PiaSzcf6huI='; style-src 'unsafe-inline'; worker-src blob:; connect-src 'none'; img-src 'none'; base-uri 'none'; form-action 'none'"><title>PixelWallet</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#111827;font:14px/1.5 system-ui,-apple-system,'Segoe UI',sans-serif}button,input{font:inherit}button{border:1px solid #d1d5db;border-radius:5px;background:#fff;color:#374151;padding:5px 11px;min-height:34px;font-size:12px;cursor:pointer;white-space:nowrap}button:hover:not(:disabled){background:#f3f4f6}button:disabled{opacity:.45;cursor:default}button:focus-visible,input:focus-visible,canvas:focus-visible,summary:focus-visible{outline:2px solid #008719;outline-offset:2px}header,main{width:100%;max-width:1280px;margin:0 auto;padding-inline:24px}header{display:flex;justify-content:space-between;align-items:center;padding-top:10px;padding-bottom:10px;margin-bottom:12px;border-bottom:1px solid #e5e7eb;gap:12px}.header-main{display:flex;align-items:center;gap:18px;min-width:0}.header-intro{font-size:11px;color:#6b7280;line-height:1.5}.brand{flex-shrink:0;font-size:18px;font-weight:650;letter-spacing:-.5px;margin:0}.offline{flex-shrink:0;white-space:nowrap;font-size:10px;color:#6b7280}.offline:before{content:'●';font-size:9px;color:#008719;margin-right:7px}main{padding-bottom:28px}p{margin:0}.workspace{display:grid;gap:14px}.panel,.stage{min-width:0;border:1px solid #e5e7eb;border-radius:7px;background:#fff}.left{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;padding:14px 16px;align-items:start}.field{min-width:0}label,.field-label{display:block;font-size:12px;font-weight:500;margin-bottom:7px}.password{display:flex;width:100%;min-width:0;border:1px solid #d1d5db;border-radius:5px;overflow:hidden}.password:focus-within{outline:2px solid #008719;outline-offset:2px}.password input{display:block;flex:1 1 0;width:0;min-width:0;height:34px;border:0;outline:none;padding:6px 10px;color:#111827;background:#fff;font-size:14px}.password input::placeholder{color:#6b7280}.password button{border:0;border-left:1px solid #e5e7eb;border-radius:0;color:#4b5563;flex-shrink:0;padding:5px 10px;font-size:11px}.primary{border-color:#008719;background:#008719;color:#fff}.primary:hover:not(:disabled){background:#006e14;border-color:#006e14}.segments{display:flex;gap:6px}.segments button{flex:1;padding:5px 9px}.segments button.active{background:#edf9ee;border-color:#008719;color:#006e14}.hint{font-size:11px;color:#6b7280;margin-top:7px;line-height:1.5}.length-heading{display:flex;align-items:baseline;flex-wrap:wrap;gap:3px 8px;margin-bottom:7px}.length-heading .field-label{margin:0;white-space:nowrap}.length-heading .hint{font-size:10px;margin:0;white-space:nowrap}#wipe{margin-top:25px;color:#4b5563;background:#f9fafb}.stage{padding:12px 14px}.toolbar,.result-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.toolbar{margin-bottom:6px}.result-heading{margin-bottom:12px;flex-wrap:wrap}h2{font-size:16px;font-weight:500;margin:0}.map-title{display:flex;align-items:center;gap:12px;min-width:0}.map-size{color:#6b7280;font-size:10px;white-space:nowrap}.tools{display:flex;align-items:center;gap:12px}#progress{font-size:10px;color:#4b5563;white-space:nowrap;font-variant-numeric:tabular-nums}.map-meta{margin-bottom:8px}.hover{font-size:12px;line-height:1.6;color:#4b5563;min-height:20px;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}#notice{font-size:12px;color:#92400e}#notice:not(:empty){padding:6px 9px;background:#fff8ed;border-radius:4px;margin-bottom:10px}.map-shell{width:100%;border:1px solid #d1d5db;overflow:hidden}.map{width:100%;aspect-ratio:2/1}canvas{display:block;width:100%;height:auto;aspect-ratio:2/1;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair}.right{padding:14px 16px}.result-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.wordlist{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.word{min-width:0;padding:7px 9px;border:1px solid #e5e7eb;border-radius:4px;font:12px/1.6 ui-monospace,monospace;background:#f9fafb;overflow-wrap:anywhere}.word em{font-style:normal;color:#6b7280;font-size:10px;margin-right:8px}.word.auto{background:#f0f9f0;border-color:#c5e7c7;color:#187b2a}.result-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}.result-meta .hint{margin:0}.checksum{font-size:12px;color:#6b7280}.checksum.valid,.copy-status{color:#008719}.copy-status{font-size:12px}.copy-status:not(:empty){margin-top:10px}details{margin-top:20px;padding:14px 0;border-top:1px solid #e5e7eb;color:#6b7280;font-size:12px;line-height:1.7}summary{cursor:pointer;color:#4b5563;font-size:12px}details p{margin-top:12px;max-width:1100px}footer{display:flex;justify-content:space-between;gap:12px;padding-top:12px;border-top:1px solid #e5e7eb;color:#6b7280;font-size:10px}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.noscript{padding:12px;border:1px solid #92400e;color:#92400e}
+@media(max-width:1050px){.left{grid-template-columns:minmax(0,1fr) 320px;gap:8px 14px}.left form{grid-row:1}.length-field{grid-column:2;grid-row:1}#wipe{grid-column:2;grid-row:2;justify-self:start;margin-top:0}}
+@media(max-width:700px){header,main{padding-inline:12px}header{align-items:start;padding-top:8px;padding-bottom:8px;margin-bottom:10px}.header-main{display:block}.header-intro{font-size:10px;margin-top:3px}.offline{font-size:9px;padding-top:4px}.left{grid-template-columns:minmax(0,1fr);padding:14px;gap:12px}.left form,.length-field,#wipe{grid-column:auto;grid-row:auto}#wipe{justify-self:start}.password input{font-size:16px}.stage{padding:10px}.map-title{align-items:start;flex-direction:column;gap:2px}.tools{gap:8px}.tools button{font-size:11px;padding-inline:8px}.wordlist{grid-template-columns:repeat(3,minmax(0,1fr))}.word{padding:6px}.word em{margin-right:5px}.right{padding:14px}.result-actions{width:100%}.result-actions button{flex:1}.result-meta{align-items:start;flex-direction:column;gap:7px}.length-heading .hint{white-space:normal}footer{flex-direction:column;gap:5px}}
+@media(max-width:350px){.toolbar{align-items:start;flex-wrap:wrap}.tools{width:100%;justify-content:space-between}.result-actions button{font-size:11px;padding-inline:8px}.wordlist{gap:5px}}
+
+
+/* Reading layout: comfortable type, short lines, clear section hierarchy. */
+.guide-disclosure,.technical-spec{border:1px solid #dce1e6;border-radius:8px;margin-top:20px;padding:0;overflow:hidden}.guide-disclosure>summary,.technical-spec>summary{padding:16px 20px;color:#17212d;font-size:16px;font-weight:600;line-height:1.5;background:#f8f9fa;cursor:pointer}.guide-disclosure>summary:hover,.technical-spec>summary:hover{background:#f0f3f5}.guide-disclosure[open]>summary,.technical-spec[open]>summary{border-bottom:1px solid #e5e7eb}.guide-content{max-width:840px;margin:auto;padding:28px 32px;font-size:15px;color:#374151;line-height:1.8}.guide-intro{font-size:16px;line-height:1.75;max-width:72ch;color:#24313e}.guide-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;max-width:72ch;margin-top:28px}.guide-grid section{min-width:0}.guide h3{font-size:17px;line-height:1.5;font-weight:600;margin:0 0 10px;color:#111827}.guide-grid p{font-size:15px;line-height:1.8;color:#374151;margin:0}.guide-grid p+p{margin-top:12px}.guide ul{padding-left:22px;margin:10px 0 14px}.guide li{padding-left:3px;margin:5px 0;line-height:1.75}.guide code,.technical-spec code{font-family:ui-monospace,monospace;font-size:.92em;overflow-wrap:anywhere;background:#f1f3f5;padding:2px 5px;border-radius:4px}.spec-body{max-width:960px;margin:auto;padding:28px 32px;color:#374151;font-size:15px;line-height:1.8}.spec-heading{display:flex;align-items:center;gap:12px;margin-bottom:12px}.spec-heading h2{font-size:20px;line-height:1.5;font-weight:600;color:#111827}.technical-spec .spec-lead{margin:0;max-width:76ch;color:#374151}.spec-section{border-top:1px solid #e5e7eb;margin-top:26px;padding-top:24px}.spec-section h3{font-size:17px;font-weight:600;color:#111827;line-height:1.5;margin:0 0 12px}.technical-spec p{font-size:15px;line-height:1.8;margin:12px 0 0;max-width:76ch}.spec-facts{display:grid;gap:0;margin:0}.spec-facts>div{display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;padding:10px 0}.spec-facts dt{color:#24313e;font-weight:600}.spec-facts dd{margin:0;min-width:0}.technical-spec pre{margin:16px 0;background:#f6f8fa;border:1px solid #dfe4e9;border-radius:6px;padding:14px 16px;white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.8 ui-monospace,monospace;color:#24313e}.technical-spec pre code{font-size:inherit;background:none;padding:0}.technical-spec .spec-example{border-left:3px solid #008719;background:#f4f9f4}.technical-spec .spec-label{font-size:13px;font-weight:600;color:#374151;margin-top:18px}.spec-table-wrap{max-width:100%;overflow:auto;margin:18px 0;border:1px solid #dfe4e9;border-radius:6px}.spec-table-wrap:focus-visible{outline:2px solid #008719;outline-offset:2px}.technical-spec table{width:100%;min-width:610px;border-collapse:collapse;text-align:left;font-size:13px;line-height:1.6}.technical-spec caption{padding:12px 14px;text-align:left;font-size:14px;font-weight:600;color:#24313e;background:#f6f8fa}.technical-spec th,.technical-spec td{padding:12px 14px;border-top:1px solid #e5e7eb;white-space:nowrap}.technical-spec thead{background:#f6f8fa;color:#374151}.technical-spec tbody th{font-weight:600;color:#111827}
+/* Keep the tool compact while making labels and status text legible. */
+button{font-size:13px}label,.field-label{font-size:13px}.hint{font-size:12px;color:#536070;line-height:1.6}.length-heading .hint{font-size:11px;white-space:normal}.map-size,#progress{font-size:12px;color:#536070}.hover{font-size:13px}.word{font-size:14px}.word em{font-size:11px}.checksum,.copy-status{font-size:13px}.offline,footer{font-size:11px;color:#536070}.password button{font-size:12px}.length-heading{min-height:20px}#wipe{margin-top:27px}
+@media(max-width:1050px){#wipe{margin-top:0}}@media(max-width:700px){.guide-disclosure>summary,.technical-spec>summary{padding:14px 16px;font-size:15px}.guide-content,.spec-body{padding:20px 16px}.guide-intro{font-size:15px}.guide-grid{gap:24px;margin-top:24px}.guide h3,.spec-section h3{font-size:16px}.guide-grid p,.technical-spec p,.spec-body{font-size:15px}.spec-heading h2{font-size:18px}.spec-facts>div{grid-template-columns:minmax(0,1fr);gap:4px}.spec-section{margin-top:22px;padding-top:20px}.technical-spec pre{font-size:12px;padding:12px}.offline{font-size:9px}.tools{gap:8px}.tools button{font-size:12px}.result-actions button{font-size:12px}.word{font-size:13px}#progress,.map-size{font-size:11px}}
+
+/* Larger reading scale across the whole interface. */
+body{font-size:16px;color:#17212d}.brand{font-size:20px}label,.field-label{font-size:15px;color:#17212d}.password input{font-size:16px;color:#17212d}.hint{font-size:14px;line-height:1.65;color:#405064}.length-heading .hint{font-size:12px;color:#405064}.length-heading{min-height:23px}.left{grid-template-columns:minmax(0,1fr) 370px}#wipe{margin-top:30px}.map-size,#progress{font-size:13px;color:#405064}.hover{font-size:15px;color:#24313e;min-height:24px}h2{font-size:18px;font-weight:600}.checksum,.copy-status,#notice{font-size:15px}.word{font-size:16px;line-height:1.7}.word em{font-size:12px;color:#536070}.offline,footer{font-size:12px;color:#405064}.guide-content{max-width:860px;padding:30px 36px;font-size:18px;color:#24313e;line-height:1.85}.guide-intro{font-size:19px;color:#17212d}.guide-grid{max-width:65ch;gap:32px}.guide-grid p{font-size:18px;line-height:1.85;color:#24313e}.guide h3{font-size:20px;margin-bottom:12px}.guide li{font-size:18px;line-height:1.8}.guide-grid p+p{margin-top:15px}.guide-disclosure>summary,.technical-spec>summary{font-size:18px;color:#17212d}.spec-body{font-size:17px;color:#24313e;max-width:940px}.technical-spec p{font-size:17px;color:#24313e;line-height:1.85;max-width:70ch}.spec-section h3{font-size:19px}.technical-spec pre{font-size:15px;line-height:1.85}.technical-spec table{font-size:15px;min-width:660px}.technical-spec caption{font-size:15px}.technical-spec .spec-label{font-size:15px}
+@media(max-width:1050px){.left{grid-template-columns:minmax(0,1fr) 370px}#wipe{margin-top:0}}
+@media(max-width:700px){.left{grid-template-columns:minmax(0,1fr)}.length-heading{min-height:0}.guide-content,.spec-body{padding:22px 18px}.guide-intro{font-size:18px}.guide-grid p,.guide li{font-size:17px;line-height:1.85}.guide h3{font-size:19px}.technical-spec p,.spec-body{font-size:16px}.spec-section h3{font-size:18px}.technical-spec pre{font-size:14px}.guide-disclosure>summary,.technical-spec>summary{font-size:17px}.offline{font-size:10px}.map-size,#progress{font-size:12px}.result-meta{gap:10px}.result-actions button{font-size:13px}.word{font-size:16px}}
+@media(max-width:480px){.wordlist{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{flex-wrap:wrap;align-items:start}.tools{flex-wrap:wrap}.length-heading{gap:4px 10px}.length-heading .hint{font-size:12px}}
+
+#hover{color:#c45c08}
+
+/* Status messages share a reserved row; the canvas never moves when they change. */
+.map-meta{display:grid;grid-template-columns:minmax(0,1fr);height:44px;margin-bottom:8px;align-items:center;overflow:hidden}#notice,#hover{grid-area:1/1;min-width:0;margin:0;max-height:44px;overflow:auto}#notice{z-index:1;line-height:1.55;overflow-wrap:anywhere}#notice:empty{display:none}#notice:not(:empty){padding:5px 9px;margin:0}#notice:not(:empty)+#hover{visibility:hidden}@media(max-width:700px){.map-meta{height:68px}#notice,#hover{max-height:68px}}
+
+/* Compact disclosure headers, with readable content inside. */
+.guide-disclosure,.technical-spec{margin-top:10px;border:0;border-top:1px solid #e5e7eb;border-radius:0;overflow:visible}.guide-disclosure>summary,.technical-spec>summary{padding:9px 2px;background:transparent;font-size:14px;font-weight:500;line-height:1.5;color:#374151}.guide-disclosure>summary:hover,.technical-spec>summary:hover{background:#fafbfc}.guide-disclosure[open]>summary,.technical-spec[open]>summary{border-bottom:1px solid #edf0f2}.guide-disclosure+.technical-spec{margin-top:0}@media(max-width:700px){.guide-disclosure>summary,.technical-spec>summary{padding:10px 2px;font-size:14px}}
+
+#show{display:flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;padding:0;color:#536070}#show:hover{color:#17212d}#show svg{display:block;pointer-events:none}#show .eye-slash{display:none}#show[aria-pressed="true"] .eye-slash{display:block}
+
+/* One compact map toolbar; notices never add rows or move the canvas. */
+.stage{padding:10px 14px 14px}.stage .toolbar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;min-height:48px;margin:0 0 10px}.stage .map-title{display:flex;flex-direction:column;align-items:flex-start;gap:1px}.stage .map-title h2{font-size:17px;line-height:1.4}.stage .map-size{font-size:11px;line-height:1.4;color:#657182}.stage .map-meta{grid-column:auto;grid-row:auto;height:42px;min-width:0;display:grid;align-items:center;margin:0;overflow:hidden}.stage #notice,.stage #hover{grid-area:1/1;max-height:42px;overflow:auto;font-size:13px;line-height:1.55;margin:0}.stage #notice:not(:empty){padding:0;background:transparent;color:#b75a0d}.stage .tools{width:auto;display:flex;flex-wrap:nowrap;align-items:center;gap:10px}.stage #progress{font-size:12px;line-height:1.5;white-space:nowrap;padding:5px 9px;background:#f3f5f7;border-radius:5px;color:#405064}.stage #progress.complete{background:#edf7ed;color:#187b2a}.stage #clear{font-size:12px;min-height:30px;padding:4px 10px}.stage .map-shell{border-color:#d4dbd1}@media(max-width:760px){.stage{padding:10px}.stage .toolbar{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px;margin-bottom:8px}.stage .map-title{grid-column:1;grid-row:1}.stage .tools{grid-column:2;grid-row:1;gap:6px}.stage .map-meta{grid-column:1/-1;grid-row:2;height:40px}.stage #notice,.stage #hover{max-height:40px;font-size:13px}.stage #progress{font-size:11px;padding:4px 6px}.stage .map-title h2{font-size:16px}.stage .map-size{font-size:10px}.stage #clear{font-size:11px;padding:4px 8px}}@media(max-width:350px){.stage .tools{gap:4px}.stage #progress{font-size:10px;padding:4px}.stage #clear{padding:4px 6px}}
+
+/* Symmetric toolbar: equal side columns keep the status at the canvas centre. */
+.stage .toolbar{grid-template-columns:210px minmax(0,1fr) 210px;column-gap:16px;min-height:48px}.stage .map-title{justify-self:start}.stage .map-meta{width:100%;justify-self:center;align-items:center}.stage #notice,.stage #hover{text-align:center;line-height:1.5}.stage .tools{justify-self:end;justify-content:flex-end}.stage .map-title h2{line-height:1.5}.stage .map-size{line-height:1.5}@media(max-width:900px){.stage .toolbar{grid-template-columns:minmax(0,1fr) auto;column-gap:12px;row-gap:6px}.stage .map-title{grid-column:1;grid-row:1}.stage .tools{grid-column:2;grid-row:1}.stage .map-meta{grid-column:1/-1;grid-row:2;height:40px}.stage #notice,.stage #hover{max-height:40px;text-align:center}}
+
+/* Mobile layout preview, also centred in a desktop window for review. */
+.mobile-layout header,.mobile-layout main{max-width:520px;padding-inline:12px}.mobile-layout .left{grid-template-columns:minmax(0,1fr);padding:14px;gap:12px}.mobile-layout .left form,.mobile-layout .length-field,.mobile-layout #wipe{grid-column:auto;grid-row:auto}.mobile-layout #wipe{margin:0;justify-self:start}.mobile-layout .password input{font-size:16px}.mobile-layout .stage{padding:10px}.mobile-layout .stage .toolbar{grid-template-columns:minmax(0,1fr) auto;gap:6px 10px}.mobile-layout .stage .map-title{grid-column:1;grid-row:1}.mobile-layout .stage .tools{grid-column:2;grid-row:1;gap:6px}.mobile-layout .stage .map-meta{grid-column:1/-1;grid-row:2;height:40px}.mobile-layout .stage #notice{max-height:40px}.mobile-layout .stage .map-title h2{font-size:16px}.mobile-layout .stage .map-size{font-size:10px}.mobile-layout .stage #progress{font-size:11px;padding:4px 6px}.mobile-layout .stage #clear{font-size:11px;padding:4px 8px}.mobile-controls{display:flex;flex-direction:column;gap:8px;margin:0 0 8px}.mobile-mode{display:flex;gap:6px}.mobile-mode button{flex:1;min-height:40px;font-size:14px}.mobile-mode button[aria-pressed="true"]{border-color:#008719;background:#edf9ee;color:#006e14}.mobile-zoom{display:flex;align-items:center;gap:8px}.mobile-zoom button{min-height:38px;font-size:14px}.mobile-zoom #zoomIn,.mobile-zoom #zoomOut{width:42px;font-size:20px;padding:0}.mobile-zoom output{min-width:32px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}.mobile-zoom #fitMap{margin-left:auto}.mobile-hint{font-size:12px;line-height:1.5;color:#536070;min-height:36px;margin-bottom:8px}.mobile-layout .map-shell{height:clamp(220px,44svh,360px);overflow:auto;overscroll-behavior:contain;touch-action:none;display:flex;align-items:center;justify-content:center;background:#f5f7f2;scrollbar-width:thin}.mobile-layout .map-shell.is-zoomed{display:block}.mobile-layout .map{max-width:none;margin:0;flex-shrink:0}.mobile-layout canvas{max-width:none;touch-action:none}.mobile-layout .wordlist{grid-template-columns:repeat(2,minmax(0,1fr))}.mobile-layout .result-meta{align-items:start;flex-direction:column;gap:8px}.mobile-layout .result-actions{width:100%}.mobile-layout .result-actions button{flex:1;font-size:12px}.mobile-layout footer{flex-direction:column;gap:5px}.mobile-layout .guide-content,.mobile-layout .spec-body{padding:20px 16px}.mobile-layout .guide-grid p,.mobile-layout .guide li{font-size:17px}.mobile-layout .spec-facts>div{grid-template-columns:minmax(0,1fr);gap:4px}
+
+/* Viewport controls stay above the canvas instead of consuming a separate row. */
+.map-frame{position:relative;isolation:isolate}.mobile-layout .map-frame .map-shell{height:clamp(280px,52svh,420px)}.map-frame .mobile-controls{position:absolute;inset:10px;z-index:3;display:block;margin:0;pointer-events:none}.map-frame .mobile-mode{position:absolute;top:0;left:0;display:flex;gap:4px;padding:3px;background:rgba(255,255,255,.96);border:1px solid #dce2d8;border-radius:8px;box-shadow:0 2px 7px #17212d14;pointer-events:auto}.map-frame .mobile-mode button{flex:none;min-height:34px;padding:5px 10px;border-color:transparent;background:transparent;font-size:12px}.map-frame .mobile-mode button[aria-pressed="true"]{border-color:#9ac59c;background:#edf9ee}.map-frame .mobile-zoom{position:absolute;right:0;bottom:0;display:flex;flex-direction:column;align-items:center;gap:3px;padding:4px;background:rgba(255,255,255,.96);border:1px solid #dce2d8;border-radius:8px;box-shadow:0 2px 7px #17212d14;pointer-events:auto}.map-frame .mobile-zoom #zoomIn,.map-frame .mobile-zoom #zoomOut,.map-frame .mobile-zoom #fitMap{width:34px;min-height:34px;padding:0;margin:0;border:0;font-size:20px;line-height:1;background:transparent}.map-frame .mobile-zoom #zoomIn{order:0}.map-frame .mobile-zoom output{order:1;min-width:0;font-size:11px;line-height:1.6;color:#536070}.map-frame .mobile-zoom #zoomOut{order:2}.map-frame .mobile-zoom #fitMap{order:3;border-top:1px solid #e5e7eb;border-radius:0;font-size:25px}.map-frame .mobile-zoom button:hover:not(:disabled){background:#f0f4ef}.mobile-layout .mobile-hint{min-height:36px;margin:0 0 8px;font-size:12px;line-height:1.5}@media(max-width:380px){.map-frame .mobile-controls{inset:7px}.map-frame .mobile-mode button{font-size:11px;padding:5px 8px}}
+
+.map-frame .mobile-mode button{display:flex;align-items:center;justify-content:center;width:36px;min-height:36px;padding:0}.map-frame .mobile-mode button svg{display:block;pointer-events:none}@media(max-width:380px){.map-frame .mobile-mode button{padding:0;width:36px;min-height:36px}}
+
+/* A single floating control rail in the lower-right corner. */
+.map-frame .mobile-controls{position:absolute;inset:auto 10px 10px auto;display:flex;flex-direction:column;gap:0;width:44px;padding:4px;background:rgba(255,255,255,.97);border:1px solid #dce2d8;border-radius:8px;box-shadow:0 2px 7px #17212d14;pointer-events:auto}.map-frame .mobile-mode,.map-frame .mobile-zoom{position:static;display:flex;flex-direction:column;align-items:center;gap:3px;width:100%;padding:0;margin:0;border:0;border-radius:0;box-shadow:none;background:transparent}.map-frame .mobile-mode{padding-bottom:5px;margin-bottom:5px;border-bottom:1px solid #e5e7eb}.map-frame .mobile-mode button{width:34px;min-height:34px;padding:0}.map-frame .mobile-zoom #zoomIn,.map-frame .mobile-zoom #zoomOut,.map-frame .mobile-zoom #fitMap{width:34px;min-height:34px}@media(max-width:380px){.map-frame .mobile-controls{inset:auto 7px 7px auto}.map-frame .mobile-mode button{width:34px;min-height:34px;padding:0}}
+
+/* No reserved blank status row in the mobile preview. */
+.mobile-layout .stage .toolbar{position:relative;min-height:0;grid-template-rows:auto;row-gap:0;margin-bottom:6px}.mobile-layout .stage .toolbar .map-meta{position:absolute;top:100%;left:0;right:0;grid-column:auto;grid-row:auto;height:0;min-height:0;margin:0;padding:0;overflow:visible;z-index:5}.mobile-layout .stage #notice{max-height:84px;overflow:auto}.mobile-layout .stage #notice:not(:empty){position:absolute;top:6px;left:0;right:0;padding:7px 10px;border:1px solid #efd8ba;border-radius:5px;background:#fff8ed;box-shadow:0 2px 6px #17212d0a;text-align:left}.mobile-layout .mobile-hint{min-height:0;line-height:1.45;margin:0 0 6px;padding:0}.mobile-layout .map-frame{margin:0}
+
+/* One file: desktop map, automatic mobile controls below 761 CSS pixels. */
+body:not(.mobile-layout) .mobile-controls,body:not(.mobile-layout) .mobile-hint{display:none!important}body:not(.mobile-layout) .map-frame{margin:0}body:not(.mobile-layout) .map-shell{height:auto;display:block;overflow:hidden}body:not(.mobile-layout) .map{max-width:100%}
+
+.copy-feedback{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 12px;margin-top:8px}.copy-feedback .copy-status{margin:0}.copy-feedback #manualCopy{border:0;background:transparent;padding:0;min-height:26px;font-size:13px;color:#006e14;text-decoration:underline;text-underline-offset:3px}.copy-panel{margin-top:12px;padding:12px;border:1px solid #d9e1d3;border-radius:6px;background:#f7faf5}.copy-panel textarea{display:block;width:100%;box-sizing:border-box;padding:10px;border:1px solid #bdc9b5;border-radius:4px;font:16px/1.6 ui-monospace,monospace;color:#17212d;background:white;resize:vertical;min-height:90px;user-select:text;-webkit-user-select:text}.copy-panel p{margin:8px 0 0;font-size:13px;line-height:1.6;color:#405064}[hidden]{display:none!important}.copy-feedback:has(.copy-status:empty):has(#manualCopy[hidden]){margin-top:0}
+
+/* Fixed action slots prevent label changes from shifting the controls. */
+.result-actions{display:grid;grid-template-columns:132px 190px;gap:8px;flex:0 0 auto;align-items:center}.result-actions button{width:100%;min-width:0;height:36px;min-height:36px;box-sizing:border-box;padding:5px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mobile-layout .result-actions{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);width:100%}@media(max-width:700px){.result-actions{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);width:100%;flex-basis:100%}}
+
+.result-meta{justify-content:flex-end}
+.map-download{display:flex;justify-content:flex-end;margin-top:8px}.map-download button{font-size:12px;min-height:32px}
+header #wipe{margin:0;flex-shrink:0;align-self:center;grid-column:auto;grid-row:auto}header{align-items:center}
+.guide-overview{max-width:65ch}.guide-overview p+p,.guide-overview ul+p{margin-top:16px}.guide-overview ul{margin:12px 0;padding-left:22px}.guide-overview li+li{margin-top:6px}
+</style></head><body>
+<header><div class="header-main"><h1 class="brand">PixelWallet</h1></div><button class="secondary" id="wipe" type="button">Очистить сеанс</button></header>
+<main><p id="startupStatus" class="noscript" role="status">Интерактивный режим не запущен. Если кнопки не работают, откройте файл в браузере с включённым JavaScript.</p><noscript><p class="noscript">Карта требует JavaScript. Откройте скачанный HTML в обычном браузере с включённым JavaScript.</p></noscript>
+<div class="workspace"><aside class="panel left"><h2 class="sr-only">Параметры генерации</h2><form id="form" autocomplete="off"><div class="field"><label for="password">Секретный пароль</label><div class="password-row"><div class="password"><input id="password" autocorrect="off" data-lpignore="true" data-1p-ignore="true" aria-describedby="passwordHint" type="password" autocomplete="off" spellcheck="false" autocapitalize="off" placeholder="Введите секретный пароль"><button id="show" type="button" aria-pressed="false" aria-label="Показать пароль"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle><path class="eye-slash" d="m3 3 18 18"></path></svg></button></div></div><p class="hint" id="passwordHint">Пароль генерирует карту. Учитывайте регистр и пробелы.</p></div></form><div class="field length-field"><div class="length-heading"><span class="field-label">Длина сид-фразы</span><span class="hint" id="modeHint">11 точек + 1 автоматическое слово</span></div><div class="segments" role="group" aria-label="Длина сид-фразы"><button id="mode12" class="active" aria-pressed="true">12 слов</button><button id="mode18" aria-pressed="false">18 слов</button><button id="mode24" aria-pressed="false">24 слова</button></div></div></aside>
+<section class="stage"><div class="toolbar"><div class="map-title"><h2>Карта слов</h2><span class="map-size">64 × 32 · 2048 слов</span></div><div class="map-meta"><div id="notice" role="status" aria-live="polite"></div></div><div class="tools"><span id="progress" role="status" aria-live="polite">0 из 11 ячеек</span><button id="clear" disabled>Сбросить</button></div></div><p id="mobileHint" class="mobile-hint">Масштаб меняется кнопками ＋ и −. Карандаш — рисовать, ладонь — перемещать.</p><div class="map-frame"><div class="map-shell"><div class="map"><canvas id="grid" width="1536" height="768" tabindex="0" role="application" aria-label="Сетка 64 на 32. Стрелки перемещают курсор, Enter выбирает точку."></canvas></div></div><div class="mobile-controls"><div class="mobile-mode" role="group" aria-label="Режим карты"><button id="drawMode" type="button" aria-pressed="false" aria-label="Рисовать" title="Рисовать"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m4 20 1.2-5.2L16.8 3.2a2.3 2.3 0 0 1 3.3 3.3L8.5 18.1 4 20Z"></path><path d="m14.8 5.2 3.3 3.3M5.2 14.8l3.3 3.3"></path></svg></button><button id="moveMode" type="button" aria-pressed="true" aria-label="Перемещать" title="Перемещать"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6M11 9V3a1.5 1.5 0 0 1 3 0v8M14 9V5a1.5 1.5 0 0 1 3 0v7M17 10V8a1.5 1.5 0 0 1 3 0v7c0 4-2.8 7-6.5 7h-1c-2.3 0-4-1.3-5.2-3.1L3.6 13.5a1.7 1.7 0 0 1 2.7-2L8 14"></path></svg></button></div><div class="mobile-zoom" role="group" aria-label="Масштаб карты"><button id="zoomOut" type="button" aria-label="Уменьшить карту">−</button><output id="zoomLevel" aria-live="polite">×1</output><button id="zoomIn" type="button" aria-label="Увеличить карту">+</button><button id="fitMap" type="button" aria-label="Вся карта" title="Вся карта">⛶</button></div></div></div><div class="map-download"><button id="downloadMap" type="button" disabled>Скачать карту · PNG</button></div></section>
+<aside class="panel right"><div class="result-heading"><div><h2>Сид-фраза</h2></div><div class="result-actions"><button class="secondary" id="reveal">Скрыть слова</button><button id="copy" aria-live="polite" type="button" class="primary" disabled>Скопировать фразу</button></div></div><div id="words" class="wordlist"></div><div class="copy-feedback"><div id="copyStatus" class="copy-status" role="status" aria-live="polite"></div><button id="manualCopy" type="button" hidden>Выделить фразу</button></div><div id="copyPanel" class="copy-panel" hidden><label for="copyText">Фраза для копирования</label><textarea id="copyText" readonly rows="3" autocomplete="off" spellcheck="false" aria-describedby="copyHelp"></textarea><p id="copyHelp">Нажмите ⌘C или Ctrl+C. На телефоне удерживайте выделенный текст и выберите «Копировать».</p></div><div class="result-meta"><p class="hint">Последнее слово вычисляется автоматически.</p></div></aside></div>
+
+<details class="guide guide-disclosure">
+<summary>Как работает PixelWallet</summary><div class="guide-content">
+<div class="guide-overview">
+<p class="guide-intro">Сид-фраза — это набор слов для восстановления доступа к криптовалютному кошельку. Её сложно запомнить, опасно хранить в открытом виде и важно не потерять.</p>
+<p>Отсюда возникает <strong>«трилемма сид-фразы»</strong> — три задачи, которые трудно совместить:</p>
+<ul><li>Сохранить доступ для себя.</li><li>Защитить его от посторонних.</li><li>Предусмотреть передачу близким.</li></ul>
+<p>Чем сложнее найти вашу резервную копию, тем труднее воспользоваться ею семье. Чем доступнее она для близких, тем внимательнее нужно защищать её от чужих.</p>
+<p><strong>PixelWallet помогает справиться с этой трилеммой, разделяя данные восстановления на пароль и визуальный рисунок.</strong></p>
+<p>Вы вводите пароль и отмечаете ячейки на карте. Программа формирует сид-фразу и автоматически рассчитывает последнее слово. Повторив тот же пароль, длину фразы и точный рисунок в сохранённой версии PixelWallet, вы получите тот же результат.</p>
+<p>Рисунок можно хранить отдельно от пароля, а для близких заранее подготовить порядок получения обеих частей. Так готовая сид-фраза не обязательно должна лежать целиком в одном месте.</p>
+<p><strong>Теперь данные для доступа к криптовалюте можно держать в голове: запоминать пароль и рисунок вместо списка случайных слов.</strong> Сама криптовалюта остаётся в блокчейне — в памяти вы храните способ восстановить доступ к ней.</p>
+<p>PixelWallet выполняет расчёты локально, без отправки пароля и сид-фразы на сервер.</p>
+<p>Это подход к решению трилеммы, а не гарантия от всех рисков: забытый пароль или неточный рисунок могут привести к потере доступа. Поэтому восстановление нужно проверить, а передачу близким — продумать заранее.</p>
+</div>
+<div class="guide-grid">
+<section><h3>Введите пароль</h3><p>Пароль определяет расположение 2048 слов английского словаря BIP39 на карте размером 64 × 32 ячейки. При первом выборе ячейки приложение рассчитывает карту через Argon2id и показывает сообщение «Расчёт карты…».</p><p>Учитывайте регистр и пробелы: <code>Example</code> и <code>example</code> создают разные карты. Кнопка с иконкой глаза показывает или скрывает пароль.</p></section>
+<section><h3>Выберите длину и нарисуйте узор</h3><ul><li><strong>12 слов:</strong> выберите 11 ячеек.</li><li><strong>18 слов:</strong> выберите 17 ячеек.</li><li><strong>24 слова:</strong> выберите 23 ячейки.</li></ul><p>Нажимайте на ячейки или рисуйте с зажатой кнопкой мыши. Движение с пустой ячейки добавляет ячейки, с синей — стирает. Повторное нажатие на выбранную ячейку снимает выбор. Красные рамки служат ориентирами.</p><p>На телефоне карандаш включает рисование, ладонь — перемещение карты. Кнопки «+» и «−» меняют масштаб, кнопка с четырьмя уголками возвращает обзор всей карты.</p></section>
+<section><h3>Получите сид-фразу</h3><p>Слова выбранных ячеек появляются под картой. Они читаются <strong>сверху вниз, в каждой строке — слева направо</strong>, независимо от порядка нажатий. Когда выбраны все необходимые ячейки, приложение добавляет последнее слово и проверяет контрольную сумму BIP39.</p><p>Кнопка «Скрыть слова» скрывает содержимое списка. «Скопировать фразу» после подтверждения переносит все слова в системный буфер обмена одной строкой. Если автоматическое копирование недоступно, появляется поле для ручного копирования.</p><p><strong>Важно:</strong> ОС или менеджер буфера могут сохранить и синхронизировать скопированную фразу. Предупреждение об этом показывается перед копированием.</p></section>
+<section><h3>Скачайте рисунок</h3><p>«Скачать карту · PNG» сохраняет сетку, красные рамки и выбранные ячейки в изображение размером 1536 × 768 пикселей. Кнопка доступна после выбора хотя бы одной ячейки; масштаб и прокрутка на результат не влияют.</p><p>Используйте изображение как образец для повторения рисунка или печати. Длину фразы сохраните отдельно: она не указана в PNG.</p></section>
+<section><h3>Проверьте восстановление</h3><p>Для восстановления из пароля и рисунка нужен <strong>PixelWallet с той же версией алгоритма</strong>. Сохраните HTML-файл приложения и инструкцию. Откройте его в новом сеансе, введите тот же пароль, задайте ту же длину и выберите те же ячейки. Сравните каждое слово с исходной фразой.</p><p>Полученную сид-фразу можно использовать в совместимом кошельке.</p></section>
+<section><h3>Сбросьте рисунок или очистите сеанс</h3><ul><li><strong>«Сбросить»</strong> снимает выбор со всех ячеек.</li><li><strong>«Очистить сеанс»</strong> в шапке очищает пароль, карту и рисунок и возвращает длину к 12 словам.</li><li>Изменение пароля или длины фразы сбрасывает рисунок.</li></ul><p>При обычном уходе со страницы и возврате из кеша приложение также очищает сеанс.</p><p>Во время работы пароль и фраза находятся в памяти. Очистка сеанса не гарантирует стирание памяти браузера или ОС и не удаляет историю буфера обмена и скачанные изображения.</p></section>
+<section><h3>Безопасность исходных данных</h3><p>Выбирайте непредсказуемые пароль и рисунок: слабый пароль и простую фигуру можно подбирать совместно.</p></section>
+</div>
+</div></details>
+<details class="technical-spec">
+<summary>Техническая часть</summary>
+<div class="spec-body">
+<div class="spec-heading"><h2>Формат генерации</h2></div>
+<p class="spec-lead">Правила расчёта карты, формирования сид-фразы, экспорта изображения и очистки данных.</p>
+<section class="spec-section"><h3>Исходные данные</h3>
+<dl class="spec-facts"><div><dt>Словарь</dt><dd>Официальный английский BIP39: 2048 слов в исходном алфавитном порядке. Индексы слов: 0–2047.</dd></div><div><dt>Карта</dt><dd>64 столбца × 32 строки. Индекс ячейки: <code>cell = row × 64 + column</code>, координаты в формуле считаются с нуля.</dd></div><div><dt>Длина фразы</dt><dd>12, 18 или 24 слова. Пользователь выбирает соответственно 11, 17 или 23 разные ячейки.</dd></div></dl>
+<p>В описании примера строки и столбцы отсчитываются с единицы: верхняя левая ячейка имеет индекс <code>0</code>. Красные рамки и масштаб отображения не участвуют в вычислениях.</p></section>
+<section class="spec-section"><h3>Получение ключа через Argon2id</h3>
+<p>Непустой пароль нормализуется по Unicode NFKD и кодируется в UTF-8. Пробелы по краям сохраняются, перевод в нижний регистр не выполняется. NFKD преобразует совместимые символы: например, неразрывный пробел в обычный. Строки, совпадающие после нормализации, дают одинаковый ключ.</p>
+<dl class="spec-facts"><div><dt>Алгоритм</dt><dd>Argon2id, версия 1.3 (<code>0x13</code>, десятичное значение 19).</dd></div><div><dt>Соль</dt><dd>Постоянная публичная строка <code>PixelWallet</code>, закодированная в UTF-8: 11 байт, <code>506978656c57616c6c6574</code>.</dd></div><div><dt>Память · m</dt><dd>65536 КиБ (64 МиБ) рабочей памяти Argon2id; общие затраты памяти браузера выше.</dd></div><div><dt>Проходы · t</dt><dd>3.</dd></div><div><dt>Параллелизм · p</dt><dd>1.</dd></div><div><dt>Выход</dt><dd>32 байта ключа перемешивания.</dd></div></dl>
+<pre><code>key = Argon2id(
+  password = UTF-8(NFKD(password)),
+  salt = UTF-8("PixelWallet"),
+  m = 65536 KiB, t = 3, p = 1,
+  length = 32, version = 0x13
+)</code></pre>
+<p>Все параметры фиксированы для компьютеров и телефонов. Скорость устройства влияет на время расчёта, но не на результат. Постоянная соль сохраняет одинаковую карту для одинаковых нормализованных паролей. Argon2id увеличивает стоимость каждой попытки подбора за счёт времени и памяти.</p></section>
+<section class="spec-section"><h3>Выполнение расчёта карты</h3><p>Первый выбор ячейки запускает расчёт в отдельном Web Worker. Его код и WebAssembly встроены в HTML. Пока ключ рассчитывается, интерфейс показывает «Расчёт карты…» и сохраняет точки текущего движения для последующей обработки.</p><p>Полученный ключ передаётся в основной поток, где выполняется перемешивание слов. Worker завершается после передачи результата. При изменении пароля, смене длины или очистке сеанса незавершённый расчёт отменяется; устаревший результат не применяется. Последующие выборы ячеек используют готовую карту.</p></section>
+<section class="spec-section"><h3>Детерминированное перемешивание</h3>
+<p>Детерминированный поток чисел строится из SHA-256 от ключа и четырёхбайтового беззнакового счётчика в формате big-endian. Счётчик начинается с нуля. Каждый 32-байтовый блок читается последовательно как восемь беззнаковых 32-битных чисел big-endian.</p>
+<pre><code>block(counter) = SHA-256(key || uint32BE(counter))
+permutation = [0, 1, …, 2047]</code></pre>
+<p>Знак <code>||</code> означает конкатенацию байтов. Перестановка выполняется алгоритмом Fisher–Yates от <code>i = 2047</code> до <code>i = 1</code>. На каждом шаге отбрасываются значения вне допустимого диапазона (rejection sampling), чтобы избежать смещения при взятии остатка:</p>
+<pre><code>n = i + 1
+limit = floor(2^32 / n) × n
+v = следующее uint32 из потока
+пока v ≥ limit: взять следующее v
+j = v mod n
+обменять permutation[i] и permutation[j]</code></pre>
+<p>Число <code>permutation[cell]</code> — индекс слова, назначенного ячейке. Каждое из 2048 слов встречается на карте ровно один раз. Длина сид-фразы не меняет перестановку.</p></section>
+<section class="spec-section"><h3>Чтение выбранных ячеек</h3>
+<p>Индексы выбранных ячеек сортируются по возрастанию. Это соответствует чтению сверху вниз, внутри каждой строки слева направо. Затем через перестановку извлекаются индексы словаря. Порядок кликов, направление линии и место начала рисования не определяют порядок слов.</p>
+<p>Непрерывное рисование соединяет пройденные ячейки дискретной линией по алгоритму Брезенхэма. При достижении лимита новые точки не добавляются. Для воспроизведения нужна именно итоговая маска выбранных ячеек, а не только приблизительная форма рисунка.</p></section>
+<section class="spec-section"><h3>Энтропия и контрольная сумма BIP39</h3>
+<p>Каждый индекс выбранного слова записывается ровно 11 битами, старший бит первым. Последовательности соединяются и дополняются нулями справа. Полученный массив исходных байтов передаётся в <code>entropyToMnemonic</code> библиотеки BIP39.</p>
+<div class="spec-table-wrap" role="region" aria-label="Параметры BIP39 для поддерживаемых длин" tabindex="0"><table><caption>Параметры трёх режимов</caption><thead><tr><th scope="col">Всего слов</th><th scope="col">Ячеек</th><th scope="col">Выбранных бит</th><th scope="col">Нулей справа</th><th scope="col">Длина ENT</th><th scope="col">Контрольная сумма</th></tr></thead><tbody><tr><th scope="row">12</th><td>11</td><td>121</td><td>7</td><td>128 бит</td><td>4 бита</td></tr><tr><th scope="row">18</th><td>17</td><td>187</td><td>5</td><td>192 бита</td><td>6 бит</td></tr><tr><th scope="row">24</th><td>23</td><td>253</td><td>3</td><td>256 бит</td><td>8 бит</td></tr></tbody></table></div>
+<p>Нулевое дополнение выполняется <strong>до хэширования</strong>. Контрольная сумма — первые 4, 6 или 8 бит SHA-256 от исходных байтов после нулевого дополнения. Они добавляются справа, после чего вся последовательность разбивается на 11-битные индексы словаря. В этой схеме последнее слово содержит 7, 5 или 3 нулевых бита и соответственно 4, 6 или 8 бит контрольной суммы. Поэтому его индекс находится в диапазоне 0–15, 0–63 или 0–255. Оно может совпасть с одним из выбранных слов. Нулевое дополнение не требуется стандартом BIP39: это отдельное правило PixelWallet.</p>
+<p>Затем <code>validateMnemonic</code> из той же библиотеки проверяет длину, словарь и контрольную сумму фразы. ENT обозначает длину исходного массива битов по терминологии BIP39, а не измеренную непредсказуемость пользовательских данных. Нули не добавляют случайности; уникальность выбранных ячеек исключает повторы среди первых 11, 17 или 23 слов.</p></section>
+<section class="spec-section"><h3>Контрольный пример</h3>
+<p>Только для проверки реализации, не для хранения средств. Пароль: <code>test-password</code>. Режим: 12 слов. Выбраны первые 11 ячеек верхней строки — индексы <code>0–10</code>, то есть столбцы 1–11 строки 1.</p>
+<p class="spec-label">Ключ Argon2id · 32 байта в шестнадцатеричной записи</p><pre><code>fd8b73c39e4b443bced63abaecfc30827bfb291283686182dc92b8cb731f5e63</code></pre>
+<p class="spec-label">Первые 12 индексов словаря в перестановке</p><pre><code>1601, 1433, 1000, 1155, 1725, 1180, 992, 795, 144, 1854, 203, 1080</code></pre>
+<p class="spec-label">Ожидаемая фраза</p><pre class="spec-example"><code>sight rebel laptop motor stumble near lab gloom bamboo treat bonus above</code></pre>
+<p>Двенадцатый элемент перестановки не является последним словом фразы: последнее слово рассчитывается по BIP39, а не выбирается из следующей ячейки.</p></section>
+<section class="spec-section"><h3>Библиотеки и исполнение</h3>
+<dl class="spec-facts"><div><dt>BIP39 и словарь</dt><dd><code>@scure/bip39 2.0.1</code></dd></div><div><dt>Argon2id</dt><dd><code>hash-wasm 4.12.0</code>, WebAssembly в отдельном Worker.</dd></div><div><dt>SHA-256</dt><dd><code>@noble/hashes 2.0.1</code></dd></div><div><dt>Кодирование</dt><dd><code>@scure/base 2.0.0</code> — зависимость BIP39.</dd></div></dl>
+<p>Библиотеки, словарь и MIT-лицензии встроены в HTML. Расчёты выполняются в браузере. CSP разрешает основной скрипт по SHA-256-хэшу, создание локального Worker через <code>worker-src blob:</code> и компиляцию WebAssembly через <code>wasm-unsafe-eval</code>. Директива <code>connect-src 'none'</code> блокирует сетевые подключения скриптов. Автозаполнение формы отключено атрибутами HTML.</p><p>При очистке сеанса массивы карты и выбранных ячеек обнуляются перед освобождением ссылок. Доступные временные байтовые массивы пароля, хэшей и данных фразы обнуляются после использования. Вычисление Argon2id выполняется в отдельном Worker, который завершается после получения ключа, при ошибке и при сбросе исходных данных. События <code>pagehide</code> и возврат из кеша через <code>pageshow</code> вызывают очистку сеанса.</p><p>Эта очистка работает в пределах страницы. Строки JavaScript и внутренние копии браузера могут оставаться в памяти; менеджеры паролей могут игнорировать запрет автозаполнения. При аварийном завершении события очистки могут не сработать. Копирование фразы и скачивание карты создают отдельные копии по действию пользователя.</p></section>
+<section class="spec-section"><h3>Экспорт карты</h3><p>Изображение создаётся локально на отдельном canvas размером 1536 × 768 пикселей и кодируется через <code>canvas.toBlob</code> с типом <code>image/png</code>. Предлагаемое имя файла — <code>PixelWallet-map.png</code>. В экспорт входят фон сетки, синие выбранные ячейки и три красные рамки.</p><p>Экспорт не зависит от экранного масштаба и положения прокрутки. Кнопка доступна, когда выбрана хотя бы одна ячейка. PNG содержит изображение текущего рисунка; пароль и длина фразы остаются параметрами сеанса.</p></section>
+<section class="spec-section"><h3>Совместимость и границы гарантий</h3>
+<p>Для воспроизведения результата должны совпадать словарь, нормализация пароля, версия и параметры Argon2id, соль, поток чисел, порядок байтов, алгоритм перемешивания, размеры карты, порядок чтения ячеек и правило нулевого дополнения. Изменение этих правил может изменить результат для прежних исходных данных. Сохранённый HTML-файл фиксирует используемую реализацию.</p>
+<p>BIP39 определяет кодирование исходных байтов и контрольную сумму. В PixelWallet исходные байты формируются из выбранных слов и нулевого дополнения. Их фактическая непредсказуемость зависит от пароля и выбранных ячеек.</p><p>Argon2id увеличивает стоимость перебора, но не устраняет этот риск. Корректная контрольная сумма подтверждает соответствие формату BIP39, а не стойкость комбинации или восстановление нужного кошелька.</p></section>
+</div></details>
+<footer><span>Идея и концепция PixelWallet — <strong>timebtc</strong> · <a href="https://github.com/timebtc" target="_blank" rel="noopener noreferrer" style="color:inherit;text-underline-offset:3px">https://github.com/timebtc</a></span><span>Один файл. Все вычисления — на этом устройстве.</span></footer></main>
+<script>
+/* PixelWallet
+
+Idea and concept: timebtc — https://github.com/timebtc
+
+CC0 1.0 Universal applies to the original PixelWallet code and documentation,
+to the extent rights in these contributions can be waived. Third-party
+libraries and their notices remain subject to their respective licenses.
+
+Creative Commons Legal Code
+
+CC0 1.0 Universal
+
+    CREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE
+    LEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN
+    ATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS
+    INFORMATION ON AN "AS-IS" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES
+    REGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS
+    PROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM
+    THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED
+    HEREUNDER.
+
+Statement of Purpose
+
+The laws of most jurisdictions throughout the world automatically confer
+exclusive Copyright and Related Rights (defined below) upon the creator
+and subsequent owner(s) (each and all, an "owner") of an original work of
+authorship and/or a database (each, a "Work").
+
+Certain owners wish to permanently relinquish those rights to a Work for
+the purpose of contributing to a commons of creative, cultural and
+scientific works ("Commons") that the public can reliably and without fear
+of later claims of infringement build upon, modify, incorporate in other
+works, reuse and redistribute as freely as possible in any form whatsoever
+and for any purposes, including without limitation commercial purposes.
+These owners may contribute to the Commons to promote the ideal of a free
+culture and the further production of creative, cultural and scientific
+works, or to gain reputation or greater distribution for their Work in
+part through the use and efforts of others.
+
+For these and/or other purposes and motivations, and without any
+expectation of additional consideration or compensation, the person
+associating CC0 with a Work (the "Affirmer"), to the extent that he or she
+is an owner of Copyright and Related Rights in the Work, voluntarily
+elects to apply CC0 to the Work and publicly distribute the Work under its
+terms, with knowledge of his or her Copyright and Related Rights in the
+Work and the meaning and intended legal effect of CC0 on those rights.
+
+1. Copyright and Related Rights. A Work made available under CC0 may be
+protected by copyright and related or neighboring rights ("Copyright and
+Related Rights"). Copyright and Related Rights include, but are not
+limited to, the following:
+
+  i. the right to reproduce, adapt, distribute, perform, display,
+     communicate, and translate a Work;
+ ii. moral rights retained by the original author(s) and/or performer(s);
+iii. publicity and privacy rights pertaining to a person's image or
+     likeness depicted in a Work;
+ iv. rights protecting against unfair competition in regards to a Work,
+     subject to the limitations in paragraph 4(a), below;
+  v. rights protecting the extraction, dissemination, use and reuse of data
+     in a Work;
+ vi. database rights (such as those arising under Directive 96/9/EC of the
+     European Parliament and of the Council of 11 March 1996 on the legal
+     protection of databases, and under any national implementation
+     thereof, including any amended or successor version of such
+     directive); and
+vii. other similar, equivalent or corresponding rights throughout the
+     world based on applicable law or treaty, and any national
+     implementations thereof.
+
+2. Waiver. To the greatest extent permitted by, but not in contravention
+of, applicable law, Affirmer hereby overtly, fully, permanently,
+irrevocably and unconditionally waives, abandons, and surrenders all of
+Affirmer's Copyright and Related Rights and associated claims and causes
+of action, whether now known or unknown (including existing as well as
+future claims and causes of action), in the Work (i) in all territories
+worldwide, (ii) for the maximum duration provided by applicable law or
+treaty (including future time extensions), (iii) in any current or future
+medium and for any number of copies, and (iv) for any purpose whatsoever,
+including without limitation commercial, advertising or promotional
+purposes (the "Waiver"). Affirmer makes the Waiver for the benefit of each
+member of the public at large and to the detriment of Affirmer's heirs and
+successors, fully intending that such Waiver shall not be subject to
+revocation, rescission, cancellation, termination, or any other legal or
+equitable action to disrupt the quiet enjoyment of the Work by the public
+as contemplated by Affirmer's express Statement of Purpose.
+
+3. Public License Fallback. Should any part of the Waiver for any reason
+be judged legally invalid or ineffective under applicable law, then the
+Waiver shall be preserved to the maximum extent permitted taking into
+account Affirmer's express Statement of Purpose. In addition, to the
+extent the Waiver is so judged Affirmer hereby grants to each affected
+person a royalty-free, non transferable, non sublicensable, non exclusive,
+irrevocable and unconditional license to exercise Affirmer's Copyright and
+Related Rights in the Work (i) in all territories worldwide, (ii) for the
+maximum duration provided by applicable law or treaty (including future
+time extensions), (iii) in any current or future medium and for any number
+of copies, and (iv) for any purpose whatsoever, including without
+limitation commercial, advertising or promotional purposes (the
+"License"). The License shall be deemed effective as of the date CC0 was
+applied by Affirmer to the Work. Should any part of the License for any
+reason be judged legally invalid or ineffective under applicable law, such
+partial invalidity or ineffectiveness shall not invalidate the remainder
+of the License, and in such case Affirmer hereby affirms that he or she
+will not (i) exercise any of his or her remaining Copyright and Related
+Rights in the Work or (ii) assert any associated claims and causes of
+action with respect to the Work, in either case contrary to Affirmer's
+express Statement of Purpose.
+
+4. Limitations and Disclaimers.
+
+ a. No trademark or patent rights held by Affirmer are waived, abandoned,
+    surrendered, licensed or otherwise affected by this document.
+ b. Affirmer offers the Work as-is and makes no representations or
+    warranties of any kind concerning the Work, express, implied,
+    statutory or otherwise, including without limitation warranties of
+    title, merchantability, fitness for a particular purpose, non
+    infringement, or the absence of latent or other defects, accuracy, or
+    the present or absence of errors, whether or not discoverable, all to
+    the greatest extent permissible under applicable law.
+ c. Affirmer disclaims responsibility for clearing rights of other persons
+    that may apply to the Work or any use thereof, including without
+    limitation any person's Copyright and Related Rights in the Work.
+    Further, Affirmer disclaims responsibility for obtaining any necessary
+    consents, permissions or other rights required for any use of the
+    Work.
+ d. Affirmer understands and acknowledges that Creative Commons is not a
+    party to this document and has no duty or obligation with respect to
+    this CC0 or use of the Work.
+
+*/
+'use strict';
+var PixelWalletCrypto=(()=>{var A=Object.defineProperty;var X=Object.getOwnPropertyDescriptor;var Y=Object.getOwnPropertyNames;var ee=Object.prototype.hasOwnProperty;var re=(r,e,t)=>e in r?A(r,e,{enumerable:!0,configurable:!0,writable:!0,value:t}):r[e]=t;var te=(r,e)=>{for(var t in e)A(r,t,{get:e[t],enumerable:!0})},oe=(r,e,t,a)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of Y(e))!ee.call(r,o)&&o!==t&&A(r,o,{get:()=>e[o],enumerable:!(a=X(e,o))||a.enumerable});return r};var ne=r=>oe(A({},"__esModule",{value:!0}),r);var u=(r,e,t)=>re(r,typeof e!="symbol"?e+"":e,t);var we={};te(we,{entropyToMnemonic:()=>J,sha256:()=>H,validateMnemonic:()=>Q,wordlist:()=>Z});/*! noble-hashes - MIT License (c) 2022 Paul Miller (paulmillr.com) */function ae(r){return r instanceof Uint8Array||ArrayBuffer.isView(r)&&r.constructor.name==="Uint8Array"}function w(r,e,t=""){let a=ae(r),o=r?.length,n=e!==void 0;if(!a||n&&o!==e){let s=t&&`"${t}" `,i=n?` of length ${e}`:"",l=a?`length=${o}`:`type=${typeof r}`;throw new Error(s+"expected Uint8Array"+i+", got "+l)}return r}function I(r,e=!0){if(r.destroyed)throw new Error("Hash instance has been destroyed");if(e&&r.finished)throw new Error("Hash#digest() has already been called")}function O(r,e){w(r,void 0,"digestInto() output");let t=e.outputLen;if(r.length<t)throw new Error('"digestInto() output" expected to be of length >='+t)}function v(...r){for(let e=0;e<r.length;e++)r[e].fill(0)}function E(r){return new DataView(r.buffer,r.byteOffset,r.byteLength)}function p(r,e){return r<<32-e|r>>>e}function R(r,e={}){let t=(o,n)=>r(n).update(o).digest(),a=r(void 0);return t.outputLen=a.outputLen,t.blockLen=a.blockLen,t.create=o=>r(o),Object.assign(t,e),Object.freeze(t)}var V=r=>({oid:Uint8Array.from([6,9,96,134,72,1,101,3,4,2,r])});function _(r,e,t){return r&e^~r&t}function q(r,e,t){return r&e^r&t^e&t}var B=class{constructor(e,t,a,o){u(this,"blockLen");u(this,"outputLen");u(this,"padOffset");u(this,"isLE");u(this,"buffer");u(this,"view");u(this,"finished",!1);u(this,"length",0);u(this,"pos",0);u(this,"destroyed",!1);this.blockLen=e,this.outputLen=t,this.padOffset=a,this.isLE=o,this.buffer=new Uint8Array(e),this.view=E(this.buffer)}update(e){I(this),w(e);let{view:t,buffer:a,blockLen:o}=this,n=e.length;for(let s=0;s<n;){let i=Math.min(o-this.pos,n-s);if(i===o){let l=E(e);for(;o<=n-s;s+=o)this.process(l,s);continue}a.set(e.subarray(s,s+i),this.pos),this.pos+=i,s+=i,this.pos===o&&(this.process(t,0),this.pos=0)}return this.length+=e.length,this.roundClean(),this}digestInto(e){I(this),O(e,this),this.finished=!0;let{buffer:t,view:a,blockLen:o,isLE:n}=this,{pos:s}=this;t[s++]=128,v(this.buffer.subarray(s)),this.padOffset>o-s&&(this.process(a,0),s=0);for(let c=s;c<o;c++)t[c]=0;a.setBigUint64(o-8,BigInt(this.length*8),n),this.process(a,0);let i=E(e),l=this.outputLen;if(l%4)throw new Error("_sha2: outputLen must be aligned to 32bit");let d=l/4,f=this.get();if(d>f.length)throw new Error("_sha2: outputLen bigger than state");for(let c=0;c<d;c++)i.setUint32(4*c,f[c],n)}digest(){let{buffer:e,outputLen:t}=this;this.digestInto(e);let a=e.slice(0,t);return this.destroy(),a}_cloneInto(e){e||(e=new this.constructor),e.set(...this.get());let{blockLen:t,buffer:a,length:o,finished:n,destroyed:s,pos:i}=this;return e.destroyed=s,e.finished=n,e.length=o,e.pos=i,o%t&&e.buffer.set(a),e}clone(){return this._cloneInto()}},b=Uint32Array.from([1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225]);var ie=Uint32Array.from([1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298]),m=new Uint32Array(64),z=class extends B{constructor(e){super(64,e,8,!1)}get(){let{A:e,B:t,C:a,D:o,E:n,F:s,G:i,H:l}=this;return[e,t,a,o,n,s,i,l]}set(e,t,a,o,n,s,i,l){this.A=e|0,this.B=t|0,this.C=a|0,this.D=o|0,this.E=n|0,this.F=s|0,this.G=i|0,this.H=l|0}process(e,t){for(let c=0;c<16;c++,t+=4)m[c]=e.getUint32(t,!1);for(let c=16;c<64;c++){let h=m[c-15],x=m[c-2],g=p(h,7)^p(h,18)^h>>>3,j=p(x,17)^p(x,19)^x>>>10;m[c]=j+m[c-7]+g+m[c-16]|0}let{A:a,B:o,C:n,D:s,E:i,F:l,G:d,H:f}=this;for(let c=0;c<64;c++){let h=p(i,6)^p(i,11)^p(i,25),x=f+h+_(i,l,d)+ie[c]+m[c]|0,j=(p(a,2)^p(a,13)^p(a,22))+q(a,o,n)|0;f=d,d=l,l=i,i=s+x|0,s=n,n=o,o=a,a=x+j|0}a=a+this.A|0,o=o+this.B|0,n=n+this.C|0,s=s+this.D|0,i=i+this.E|0,l=l+this.F|0,d=d+this.G|0,f=f+this.H|0,this.set(a,o,n,s,i,l,d,f)}roundClean(){v(m)}destroy(){this.set(0,0,0,0,0,0,0,0),v(this.buffer)}},D=class extends z{constructor(){super(32);u(this,"A",b[0]|0);u(this,"B",b[1]|0);u(this,"C",b[2]|0);u(this,"D",b[3]|0);u(this,"E",b[4]|0);u(this,"F",b[5]|0);u(this,"G",b[6]|0);u(this,"H",b[7]|0)}};var H=R(()=>new D,V(1));/*! scure-base - MIT License (c) 2022 Paul Miller (paulmillr.com) */function L(r){return r instanceof Uint8Array||ArrayBuffer.isView(r)&&r.constructor.name==="Uint8Array"}function M(r,e){return Array.isArray(e)?e.length===0?!0:r?e.every(t=>typeof t=="string"):e.every(t=>Number.isSafeInteger(t)):!1}function se(r){if(typeof r!="function")throw new Error("function expected");return!0}function U(r,e){if(typeof e!="string")throw new Error(`${r}: string expected`);return!0}function y(r){if(!Number.isSafeInteger(r))throw new Error(`invalid integer: ${r}`)}function C(r){if(!Array.isArray(r))throw new Error("array expected")}function S(r,e){if(!M(!0,e))throw new Error(`${r}: array of strings expected`)}function N(r,e){if(!M(!1,e))throw new Error(`${r}: array of numbers expected`)}function ce(...r){let e=n=>n,t=(n,s)=>i=>n(s(i)),a=r.map(n=>n.encode).reduceRight(t,e),o=r.map(n=>n.decode).reduce(t,e);return{encode:a,decode:o}}function le(r){let e=typeof r=="string"?r.split(""):r,t=e.length;S("alphabet",e);let a=new Map(e.map((o,n)=>[o,n]));return{encode:o=>(C(o),o.map(n=>{if(!Number.isSafeInteger(n)||n<0||n>=t)throw new Error(`alphabet.encode: digit index outside alphabet "${n}". Allowed: ${r}`);return e[n]})),decode:o=>(C(o),o.map(n=>{U("alphabet.decode",n);let s=a.get(n);if(s===void 0)throw new Error(`Unknown letter: "${n}". Allowed: ${r}`);return s}))}}function de(r=""){return U("join",r),{encode:e=>(S("join.decode",e),e.join(r)),decode:e=>(U("join.decode",e),e.split(r))}}function ue(r,e="="){return y(r),U("padding",e),{encode(t){for(S("padding.encode",t);t.length*r%8;)t.push(e);return t},decode(t){S("padding.decode",t);let a=t.length;if(a*r%8)throw new Error("padding: invalid, string should have whole number of bytes");for(;a>0&&t[a-1]===e;a--)if((a-1)*r%8===0)throw new Error("padding: invalid, string has too much padding");return t.slice(0,a)}}}function F(r,e,t){if(e<2)throw new Error(`convertRadix: invalid from=${e}, base cannot be less than 2`);if(t<2)throw new Error(`convertRadix: invalid to=${t}, base cannot be less than 2`);if(C(r),!r.length)return[];let a=0,o=[],n=Array.from(r,i=>{if(y(i),i<0||i>=e)throw new Error(`invalid integer: ${i}`);return i}),s=n.length;for(;;){let i=0,l=!0;for(let d=a;d<s;d++){let f=n[d],c=e*i,h=c+f;if(!Number.isSafeInteger(h)||c/e!==i||h-f!==c)throw new Error("convertRadix: carry overflow");let x=h/t;i=h%t;let g=Math.floor(x);if(n[d]=g,!Number.isSafeInteger(g)||g*t+i!==h)throw new Error("convertRadix: carry overflow");if(l)g?l=!1:a=d;else continue}if(o.push(i),l)break}for(let i=0;i<r.length-1&&r[i]===0;i++)o.push(0);return o.reverse()}var W=(r,e)=>e===0?r:W(e,r%e),T=(r,e)=>r+(e-W(r,e)),$=(()=>{let r=[];for(let e=0;e<40;e++)r.push(2**e);return r})();function G(r,e,t,a){if(C(r),e<=0||e>32)throw new Error(`convertRadix2: wrong from=${e}`);if(t<=0||t>32)throw new Error(`convertRadix2: wrong to=${t}`);if(T(e,t)>32)throw new Error(`convertRadix2: carry overflow from=${e} to=${t} carryBits=${T(e,t)}`);let o=0,n=0,s=$[e],i=$[t]-1,l=[];for(let d of r){if(y(d),d>=s)throw new Error(`convertRadix2: invalid data word=${d} from=${e}`);if(o=o<<e|d,n+e>32)throw new Error(`convertRadix2: carry overflow pos=${n} from=${e}`);for(n+=e;n>=t;n-=t)l.push((o>>n-t&i)>>>0);let f=$[n];if(f===void 0)throw new Error("invalid carry");o&=f-1}if(o=o<<t-n&i,!a&&n>=e)throw new Error("Excess padding");if(!a&&o>0)throw new Error(`Non-zero padding: ${o}`);return a&&n>0&&l.push(o>>>0),l}function fe(r){y(r);let e=2**8;return{encode:t=>{if(!L(t))throw new Error("radix.encode input should be Uint8Array");return F(Array.from(t),e,r)},decode:t=>(N("radix.decode",t),Uint8Array.from(F(t,r,e)))}}function he(r,e=!1){if(y(r),r<=0||r>32)throw new Error("radix2: bits should be in (0..32]");if(T(8,r)>32||T(r,8)>32)throw new Error("radix2: carry overflow");return{encode:t=>{if(!L(t))throw new Error("radix2.encode input should be Uint8Array");return G(Array.from(t),8,r,!e)},decode:t=>(N("radix2.decode",t),Uint8Array.from(G(t,r,8,e)))}}function pe(r,e){return y(r),se(e),{encode(t){if(!L(t))throw new Error("checksum.encode: input should be Uint8Array");let a=e(t).slice(0,r),o=new Uint8Array(t.length+r);return o.set(t),o.set(a,t.length),o},decode(t){if(!L(t))throw new Error("checksum.decode: input should be Uint8Array");let a=t.slice(0,-r),o=t.slice(-r),n=e(a).slice(0,r);for(let s=0;s<r;s++)if(n[s]!==o[s])throw new Error("Invalid checksum");return a}}}var k={alphabet:le,chain:ce,checksum:pe,convertRadix:F,convertRadix2:G,radix:fe,radix2:he,join:de,padding:ue};/*! scure-bip39 - MIT License (c) 2022 Patricio Palladino, Paul Miller (paulmillr.com) */var be=r=>r[0]==="\u3042\u3044\u3053\u304F\u3057\u3093";function xe(r){if(typeof r!="string")throw new TypeError("invalid mnemonic type: "+typeof r);return r.normalize("NFKD")}function me(r){let e=xe(r),t=e.split(" ");if(![12,15,18,21,24].includes(t.length))throw new Error("Invalid mnemonic");return{nfkd:e,words:t}}function K(r){if(w(r),![16,20,24,28,32].includes(r.length))throw new Error("invalid entropy length")}var ge=r=>{let e=8-r.length/4;return new Uint8Array([H(r)[0]>>e<<e])};function P(r){if(!Array.isArray(r)||r.length!==2048||typeof r[0]!="string")throw new Error("Wordlist: expected array of 2048 strings");return r.forEach(e=>{if(typeof e!="string")throw new Error("wordlist: non-string element: "+e)}),k.chain(k.checksum(1,ge),k.radix2(11,!0),k.alphabet(r))}function ye(r,e){let{words:t}=me(r),a=P(e).decode(t);return K(a),a}function J(r,e){return K(r),P(e).encode(r).join(be(e)?"\u3000":" ")}function Q(r,e){try{ye(r,e)}catch{return!1}return!0}var Z=`abandon
+ability
+able
+about
+above
+absent
+absorb
+abstract
+absurd
+abuse
+access
+accident
+account
+accuse
+achieve
+acid
+acoustic
+acquire
+across
+act
+action
+actor
+actress
+actual
+adapt
+add
+addict
+address
+adjust
+admit
+adult
+advance
+advice
+aerobic
+affair
+afford
+afraid
+again
+age
+agent
+agree
+ahead
+aim
+air
+airport
+aisle
+alarm
+album
+alcohol
+alert
+alien
+all
+alley
+allow
+almost
+alone
+alpha
+already
+also
+alter
+always
+amateur
+amazing
+among
+amount
+amused
+analyst
+anchor
+ancient
+anger
+angle
+angry
+animal
+ankle
+announce
+annual
+another
+answer
+antenna
+antique
+anxiety
+any
+apart
+apology
+appear
+apple
+approve
+april
+arch
+arctic
+area
+arena
+argue
+arm
+armed
+armor
+army
+around
+arrange
+arrest
+arrive
+arrow
+art
+artefact
+artist
+artwork
+ask
+aspect
+assault
+asset
+assist
+assume
+asthma
+athlete
+atom
+attack
+attend
+attitude
+attract
+auction
+audit
+august
+aunt
+author
+auto
+autumn
+average
+avocado
+avoid
+awake
+aware
+away
+awesome
+awful
+awkward
+axis
+baby
+bachelor
+bacon
+badge
+bag
+balance
+balcony
+ball
+bamboo
+banana
+banner
+bar
+barely
+bargain
+barrel
+base
+basic
+basket
+battle
+beach
+bean
+beauty
+because
+become
+beef
+before
+begin
+behave
+behind
+believe
+below
+belt
+bench
+benefit
+best
+betray
+better
+between
+beyond
+bicycle
+bid
+bike
+bind
+biology
+bird
+birth
+bitter
+black
+blade
+blame
+blanket
+blast
+bleak
+bless
+blind
+blood
+blossom
+blouse
+blue
+blur
+blush
+board
+boat
+body
+boil
+bomb
+bone
+bonus
+book
+boost
+border
+boring
+borrow
+boss
+bottom
+bounce
+box
+boy
+bracket
+brain
+brand
+brass
+brave
+bread
+breeze
+brick
+bridge
+brief
+bright
+bring
+brisk
+broccoli
+broken
+bronze
+broom
+brother
+brown
+brush
+bubble
+buddy
+budget
+buffalo
+build
+bulb
+bulk
+bullet
+bundle
+bunker
+burden
+burger
+burst
+bus
+business
+busy
+butter
+buyer
+buzz
+cabbage
+cabin
+cable
+cactus
+cage
+cake
+call
+calm
+camera
+camp
+can
+canal
+cancel
+candy
+cannon
+canoe
+canvas
+canyon
+capable
+capital
+captain
+car
+carbon
+card
+cargo
+carpet
+carry
+cart
+case
+cash
+casino
+castle
+casual
+cat
+catalog
+catch
+category
+cattle
+caught
+cause
+caution
+cave
+ceiling
+celery
+cement
+census
+century
+cereal
+certain
+chair
+chalk
+champion
+change
+chaos
+chapter
+charge
+chase
+chat
+cheap
+check
+cheese
+chef
+cherry
+chest
+chicken
+chief
+child
+chimney
+choice
+choose
+chronic
+chuckle
+chunk
+churn
+cigar
+cinnamon
+circle
+citizen
+city
+civil
+claim
+clap
+clarify
+claw
+clay
+clean
+clerk
+clever
+click
+client
+cliff
+climb
+clinic
+clip
+clock
+clog
+close
+cloth
+cloud
+clown
+club
+clump
+cluster
+clutch
+coach
+coast
+coconut
+code
+coffee
+coil
+coin
+collect
+color
+column
+combine
+come
+comfort
+comic
+common
+company
+concert
+conduct
+confirm
+congress
+connect
+consider
+control
+convince
+cook
+cool
+copper
+copy
+coral
+core
+corn
+correct
+cost
+cotton
+couch
+country
+couple
+course
+cousin
+cover
+coyote
+crack
+cradle
+craft
+cram
+crane
+crash
+crater
+crawl
+crazy
+cream
+credit
+creek
+crew
+cricket
+crime
+crisp
+critic
+crop
+cross
+crouch
+crowd
+crucial
+cruel
+cruise
+crumble
+crunch
+crush
+cry
+crystal
+cube
+culture
+cup
+cupboard
+curious
+current
+curtain
+curve
+cushion
+custom
+cute
+cycle
+dad
+damage
+damp
+dance
+danger
+daring
+dash
+daughter
+dawn
+day
+deal
+debate
+debris
+decade
+december
+decide
+decline
+decorate
+decrease
+deer
+defense
+define
+defy
+degree
+delay
+deliver
+demand
+demise
+denial
+dentist
+deny
+depart
+depend
+deposit
+depth
+deputy
+derive
+describe
+desert
+design
+desk
+despair
+destroy
+detail
+detect
+develop
+device
+devote
+diagram
+dial
+diamond
+diary
+dice
+diesel
+diet
+differ
+digital
+dignity
+dilemma
+dinner
+dinosaur
+direct
+dirt
+disagree
+discover
+disease
+dish
+dismiss
+disorder
+display
+distance
+divert
+divide
+divorce
+dizzy
+doctor
+document
+dog
+doll
+dolphin
+domain
+donate
+donkey
+donor
+door
+dose
+double
+dove
+draft
+dragon
+drama
+drastic
+draw
+dream
+dress
+drift
+drill
+drink
+drip
+drive
+drop
+drum
+dry
+duck
+dumb
+dune
+during
+dust
+dutch
+duty
+dwarf
+dynamic
+eager
+eagle
+early
+earn
+earth
+easily
+east
+easy
+echo
+ecology
+economy
+edge
+edit
+educate
+effort
+egg
+eight
+either
+elbow
+elder
+electric
+elegant
+element
+elephant
+elevator
+elite
+else
+embark
+embody
+embrace
+emerge
+emotion
+employ
+empower
+empty
+enable
+enact
+end
+endless
+endorse
+enemy
+energy
+enforce
+engage
+engine
+enhance
+enjoy
+enlist
+enough
+enrich
+enroll
+ensure
+enter
+entire
+entry
+envelope
+episode
+equal
+equip
+era
+erase
+erode
+erosion
+error
+erupt
+escape
+essay
+essence
+estate
+eternal
+ethics
+evidence
+evil
+evoke
+evolve
+exact
+example
+excess
+exchange
+excite
+exclude
+excuse
+execute
+exercise
+exhaust
+exhibit
+exile
+exist
+exit
+exotic
+expand
+expect
+expire
+explain
+expose
+express
+extend
+extra
+eye
+eyebrow
+fabric
+face
+faculty
+fade
+faint
+faith
+fall
+false
+fame
+family
+famous
+fan
+fancy
+fantasy
+farm
+fashion
+fat
+fatal
+father
+fatigue
+fault
+favorite
+feature
+february
+federal
+fee
+feed
+feel
+female
+fence
+festival
+fetch
+fever
+few
+fiber
+fiction
+field
+figure
+file
+film
+filter
+final
+find
+fine
+finger
+finish
+fire
+firm
+first
+fiscal
+fish
+fit
+fitness
+fix
+flag
+flame
+flash
+flat
+flavor
+flee
+flight
+flip
+float
+flock
+floor
+flower
+fluid
+flush
+fly
+foam
+focus
+fog
+foil
+fold
+follow
+food
+foot
+force
+forest
+forget
+fork
+fortune
+forum
+forward
+fossil
+foster
+found
+fox
+fragile
+frame
+frequent
+fresh
+friend
+fringe
+frog
+front
+frost
+frown
+frozen
+fruit
+fuel
+fun
+funny
+furnace
+fury
+future
+gadget
+gain
+galaxy
+gallery
+game
+gap
+garage
+garbage
+garden
+garlic
+garment
+gas
+gasp
+gate
+gather
+gauge
+gaze
+general
+genius
+genre
+gentle
+genuine
+gesture
+ghost
+giant
+gift
+giggle
+ginger
+giraffe
+girl
+give
+glad
+glance
+glare
+glass
+glide
+glimpse
+globe
+gloom
+glory
+glove
+glow
+glue
+goat
+goddess
+gold
+good
+goose
+gorilla
+gospel
+gossip
+govern
+gown
+grab
+grace
+grain
+grant
+grape
+grass
+gravity
+great
+green
+grid
+grief
+grit
+grocery
+group
+grow
+grunt
+guard
+guess
+guide
+guilt
+guitar
+gun
+gym
+habit
+hair
+half
+hammer
+hamster
+hand
+happy
+harbor
+hard
+harsh
+harvest
+hat
+have
+hawk
+hazard
+head
+health
+heart
+heavy
+hedgehog
+height
+hello
+helmet
+help
+hen
+hero
+hidden
+high
+hill
+hint
+hip
+hire
+history
+hobby
+hockey
+hold
+hole
+holiday
+hollow
+home
+honey
+hood
+hope
+horn
+horror
+horse
+hospital
+host
+hotel
+hour
+hover
+hub
+huge
+human
+humble
+humor
+hundred
+hungry
+hunt
+hurdle
+hurry
+hurt
+husband
+hybrid
+ice
+icon
+idea
+identify
+idle
+ignore
+ill
+illegal
+illness
+image
+imitate
+immense
+immune
+impact
+impose
+improve
+impulse
+inch
+include
+income
+increase
+index
+indicate
+indoor
+industry
+infant
+inflict
+inform
+inhale
+inherit
+initial
+inject
+injury
+inmate
+inner
+innocent
+input
+inquiry
+insane
+insect
+inside
+inspire
+install
+intact
+interest
+into
+invest
+invite
+involve
+iron
+island
+isolate
+issue
+item
+ivory
+jacket
+jaguar
+jar
+jazz
+jealous
+jeans
+jelly
+jewel
+job
+join
+joke
+journey
+joy
+judge
+juice
+jump
+jungle
+junior
+junk
+just
+kangaroo
+keen
+keep
+ketchup
+key
+kick
+kid
+kidney
+kind
+kingdom
+kiss
+kit
+kitchen
+kite
+kitten
+kiwi
+knee
+knife
+knock
+know
+lab
+label
+labor
+ladder
+lady
+lake
+lamp
+language
+laptop
+large
+later
+latin
+laugh
+laundry
+lava
+law
+lawn
+lawsuit
+layer
+lazy
+leader
+leaf
+learn
+leave
+lecture
+left
+leg
+legal
+legend
+leisure
+lemon
+lend
+length
+lens
+leopard
+lesson
+letter
+level
+liar
+liberty
+library
+license
+life
+lift
+light
+like
+limb
+limit
+link
+lion
+liquid
+list
+little
+live
+lizard
+load
+loan
+lobster
+local
+lock
+logic
+lonely
+long
+loop
+lottery
+loud
+lounge
+love
+loyal
+lucky
+luggage
+lumber
+lunar
+lunch
+luxury
+lyrics
+machine
+mad
+magic
+magnet
+maid
+mail
+main
+major
+make
+mammal
+man
+manage
+mandate
+mango
+mansion
+manual
+maple
+marble
+march
+margin
+marine
+market
+marriage
+mask
+mass
+master
+match
+material
+math
+matrix
+matter
+maximum
+maze
+meadow
+mean
+measure
+meat
+mechanic
+medal
+media
+melody
+melt
+member
+memory
+mention
+menu
+mercy
+merge
+merit
+merry
+mesh
+message
+metal
+method
+middle
+midnight
+milk
+million
+mimic
+mind
+minimum
+minor
+minute
+miracle
+mirror
+misery
+miss
+mistake
+mix
+mixed
+mixture
+mobile
+model
+modify
+mom
+moment
+monitor
+monkey
+monster
+month
+moon
+moral
+more
+morning
+mosquito
+mother
+motion
+motor
+mountain
+mouse
+move
+movie
+much
+muffin
+mule
+multiply
+muscle
+museum
+mushroom
+music
+must
+mutual
+myself
+mystery
+myth
+naive
+name
+napkin
+narrow
+nasty
+nation
+nature
+near
+neck
+need
+negative
+neglect
+neither
+nephew
+nerve
+nest
+net
+network
+neutral
+never
+news
+next
+nice
+night
+noble
+noise
+nominee
+noodle
+normal
+north
+nose
+notable
+note
+nothing
+notice
+novel
+now
+nuclear
+number
+nurse
+nut
+oak
+obey
+object
+oblige
+obscure
+observe
+obtain
+obvious
+occur
+ocean
+october
+odor
+off
+offer
+office
+often
+oil
+okay
+old
+olive
+olympic
+omit
+once
+one
+onion
+online
+only
+open
+opera
+opinion
+oppose
+option
+orange
+orbit
+orchard
+order
+ordinary
+organ
+orient
+original
+orphan
+ostrich
+other
+outdoor
+outer
+output
+outside
+oval
+oven
+over
+own
+owner
+oxygen
+oyster
+ozone
+pact
+paddle
+page
+pair
+palace
+palm
+panda
+panel
+panic
+panther
+paper
+parade
+parent
+park
+parrot
+party
+pass
+patch
+path
+patient
+patrol
+pattern
+pause
+pave
+payment
+peace
+peanut
+pear
+peasant
+pelican
+pen
+penalty
+pencil
+people
+pepper
+perfect
+permit
+person
+pet
+phone
+photo
+phrase
+physical
+piano
+picnic
+picture
+piece
+pig
+pigeon
+pill
+pilot
+pink
+pioneer
+pipe
+pistol
+pitch
+pizza
+place
+planet
+plastic
+plate
+play
+please
+pledge
+pluck
+plug
+plunge
+poem
+poet
+point
+polar
+pole
+police
+pond
+pony
+pool
+popular
+portion
+position
+possible
+post
+potato
+pottery
+poverty
+powder
+power
+practice
+praise
+predict
+prefer
+prepare
+present
+pretty
+prevent
+price
+pride
+primary
+print
+priority
+prison
+private
+prize
+problem
+process
+produce
+profit
+program
+project
+promote
+proof
+property
+prosper
+protect
+proud
+provide
+public
+pudding
+pull
+pulp
+pulse
+pumpkin
+punch
+pupil
+puppy
+purchase
+purity
+purpose
+purse
+push
+put
+puzzle
+pyramid
+quality
+quantum
+quarter
+question
+quick
+quit
+quiz
+quote
+rabbit
+raccoon
+race
+rack
+radar
+radio
+rail
+rain
+raise
+rally
+ramp
+ranch
+random
+range
+rapid
+rare
+rate
+rather
+raven
+raw
+razor
+ready
+real
+reason
+rebel
+rebuild
+recall
+receive
+recipe
+record
+recycle
+reduce
+reflect
+reform
+refuse
+region
+regret
+regular
+reject
+relax
+release
+relief
+rely
+remain
+remember
+remind
+remove
+render
+renew
+rent
+reopen
+repair
+repeat
+replace
+report
+require
+rescue
+resemble
+resist
+resource
+response
+result
+retire
+retreat
+return
+reunion
+reveal
+review
+reward
+rhythm
+rib
+ribbon
+rice
+rich
+ride
+ridge
+rifle
+right
+rigid
+ring
+riot
+ripple
+risk
+ritual
+rival
+river
+road
+roast
+robot
+robust
+rocket
+romance
+roof
+rookie
+room
+rose
+rotate
+rough
+round
+route
+royal
+rubber
+rude
+rug
+rule
+run
+runway
+rural
+sad
+saddle
+sadness
+safe
+sail
+salad
+salmon
+salon
+salt
+salute
+same
+sample
+sand
+satisfy
+satoshi
+sauce
+sausage
+save
+say
+scale
+scan
+scare
+scatter
+scene
+scheme
+school
+science
+scissors
+scorpion
+scout
+scrap
+screen
+script
+scrub
+sea
+search
+season
+seat
+second
+secret
+section
+security
+seed
+seek
+segment
+select
+sell
+seminar
+senior
+sense
+sentence
+series
+service
+session
+settle
+setup
+seven
+shadow
+shaft
+shallow
+share
+shed
+shell
+sheriff
+shield
+shift
+shine
+ship
+shiver
+shock
+shoe
+shoot
+shop
+short
+shoulder
+shove
+shrimp
+shrug
+shuffle
+shy
+sibling
+sick
+side
+siege
+sight
+sign
+silent
+silk
+silly
+silver
+similar
+simple
+since
+sing
+siren
+sister
+situate
+six
+size
+skate
+sketch
+ski
+skill
+skin
+skirt
+skull
+slab
+slam
+sleep
+slender
+slice
+slide
+slight
+slim
+slogan
+slot
+slow
+slush
+small
+smart
+smile
+smoke
+smooth
+snack
+snake
+snap
+sniff
+snow
+soap
+soccer
+social
+sock
+soda
+soft
+solar
+soldier
+solid
+solution
+solve
+someone
+song
+soon
+sorry
+sort
+soul
+sound
+soup
+source
+south
+space
+spare
+spatial
+spawn
+speak
+special
+speed
+spell
+spend
+sphere
+spice
+spider
+spike
+spin
+spirit
+split
+spoil
+sponsor
+spoon
+sport
+spot
+spray
+spread
+spring
+spy
+square
+squeeze
+squirrel
+stable
+stadium
+staff
+stage
+stairs
+stamp
+stand
+start
+state
+stay
+steak
+steel
+stem
+step
+stereo
+stick
+still
+sting
+stock
+stomach
+stone
+stool
+story
+stove
+strategy
+street
+strike
+strong
+struggle
+student
+stuff
+stumble
+style
+subject
+submit
+subway
+success
+such
+sudden
+suffer
+sugar
+suggest
+suit
+summer
+sun
+sunny
+sunset
+super
+supply
+supreme
+sure
+surface
+surge
+surprise
+surround
+survey
+suspect
+sustain
+swallow
+swamp
+swap
+swarm
+swear
+sweet
+swift
+swim
+swing
+switch
+sword
+symbol
+symptom
+syrup
+system
+table
+tackle
+tag
+tail
+talent
+talk
+tank
+tape
+target
+task
+taste
+tattoo
+taxi
+teach
+team
+tell
+ten
+tenant
+tennis
+tent
+term
+test
+text
+thank
+that
+theme
+then
+theory
+there
+they
+thing
+this
+thought
+three
+thrive
+throw
+thumb
+thunder
+ticket
+tide
+tiger
+tilt
+timber
+time
+tiny
+tip
+tired
+tissue
+title
+toast
+tobacco
+today
+toddler
+toe
+together
+toilet
+token
+tomato
+tomorrow
+tone
+tongue
+tonight
+tool
+tooth
+top
+topic
+topple
+torch
+tornado
+tortoise
+toss
+total
+tourist
+toward
+tower
+town
+toy
+track
+trade
+traffic
+tragic
+train
+transfer
+trap
+trash
+travel
+tray
+treat
+tree
+trend
+trial
+tribe
+trick
+trigger
+trim
+trip
+trophy
+trouble
+truck
+true
+truly
+trumpet
+trust
+truth
+try
+tube
+tuition
+tumble
+tuna
+tunnel
+turkey
+turn
+turtle
+twelve
+twenty
+twice
+twin
+twist
+two
+type
+typical
+ugly
+umbrella
+unable
+unaware
+uncle
+uncover
+under
+undo
+unfair
+unfold
+unhappy
+uniform
+unique
+unit
+universe
+unknown
+unlock
+until
+unusual
+unveil
+update
+upgrade
+uphold
+upon
+upper
+upset
+urban
+urge
+usage
+use
+used
+useful
+useless
+usual
+utility
+vacant
+vacuum
+vague
+valid
+valley
+valve
+van
+vanish
+vapor
+various
+vast
+vault
+vehicle
+velvet
+vendor
+venture
+venue
+verb
+verify
+version
+very
+vessel
+veteran
+viable
+vibrant
+vicious
+victory
+video
+view
+village
+vintage
+violin
+virtual
+virus
+visa
+visit
+visual
+vital
+vivid
+vocal
+voice
+void
+volcano
+volume
+vote
+voyage
+wage
+wagon
+wait
+walk
+wall
+walnut
+want
+warfare
+warm
+warrior
+wash
+wasp
+waste
+water
+wave
+way
+wealth
+weapon
+wear
+weasel
+weather
+web
+wedding
+weekend
+weird
+welcome
+west
+wet
+whale
+what
+wheat
+wheel
+when
+where
+whip
+whisper
+wide
+width
+wife
+wild
+will
+win
+window
+wine
+wing
+wink
+winner
+winter
+wire
+wisdom
+wise
+wish
+witness
+wolf
+woman
+wonder
+wood
+wool
+word
+work
+world
+worry
+worth
+wrap
+wreck
+wrestle
+wrist
+write
+wrong
+yard
+year
+yellow
+you
+young
+youth
+zebra
+zero
+zone
+zoo`.split(`
+`);return ne(we);})();
+
+
+window.addEventListener('error',event=>{const notice=document.getElementById('notice');if(notice)notice.textContent='Ошибка приложения. Очистите сеанс и откройте файл заново.';});
+const WORDS=PixelWalletCrypto.wordlist;
+const WORD_INDEX=new Map(WORDS.map((word,index)=>[word,index]));
+// SHA-256 from @noble/hashes 2.0.1, bundled locally.
+const sha256=PixelWalletCrypto.sha256;
+const ARGON_WORKER_SOURCE="(()=>{function S(A,B,I,g){function C(Q){return Q instanceof I?Q:new I(function(E){E(Q)})}return new(I||(I=Promise))(function(Q,E){function F(k){try{h(g.next(k))}catch(e){E(e)}}function D(k){try{h(g.throw(k))}catch(e){E(e)}}function h(k){k.done?Q(k.value):C(k.value).then(F,D)}h((g=g.apply(A,B||[])).next())})}var c=class{constructor(){this.mutex=Promise.resolve()}lock(){let B=()=>{};return this.mutex=this.mutex.then(()=>new Promise(B)),new Promise(I=>{B=I})}dispatch(B){return S(this,void 0,void 0,function*(){let I=yield this.lock();try{return yield Promise.resolve(B())}finally{I()}})}},R;function $(){return typeof globalThis<\"u\"?globalThis:typeof self<\"u\"?self:typeof window<\"u\"?window:global}var z=$(),l=(R=z.Buffer)!==null&&R!==void 0?R:null,_=z.TextEncoder?new z.TextEncoder:null;function P(A,B){return(A&15)+(A>>6|A>>3&8)<<4|(B&15)+(B>>6|B>>3&8)}function v(A,B){let I=B.length>>1;for(let g=0;g<I;g++){let C=g<<1;A[g]=P(B.charCodeAt(C),B.charCodeAt(C+1))}}function AA(A,B){if(A.length!==B.length*2)return!1;for(let I=0;I<B.length;I++){let g=I<<1;if(B[I]!==P(A.charCodeAt(g),A.charCodeAt(g+1)))return!1}return!0}var m=87,L=48;function V(A,B,I){let g=0;for(let C=0;C<I;C++){let Q=B[C]>>>4;A[g++]=Q>9?Q+m:Q+L,Q=B[C]&15,A[g++]=Q>9?Q+m:Q+L}return String.fromCharCode.apply(null,A)}var d=l!==null?A=>{if(typeof A==\"string\"){let B=l.from(A,\"utf8\");return new Uint8Array(B.buffer,B.byteOffset,B.length)}if(l.isBuffer(A))return new Uint8Array(A.buffer,A.byteOffset,A.length);if(ArrayBuffer.isView(A))return new Uint8Array(A.buffer,A.byteOffset,A.byteLength);throw new Error(\"Invalid data type!\")}:A=>{if(typeof A==\"string\")return _.encode(A);if(ArrayBuffer.isView(A))return new Uint8Array(A.buffer,A.byteOffset,A.byteLength);throw new Error(\"Invalid data type!\")},n=\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/\",M=new Uint8Array(256);for(let A=0;A<n.length;A++)M[n.charCodeAt(A)]=A;function x(A,B=!0){let I=A.length,g=I%3,C=[],Q=I-g;for(let E=0;E<Q;E+=3){let F=(A[E]<<16&16711680)+(A[E+1]<<8&65280)+(A[E+2]&255),D=n.charAt(F>>18&63)+n.charAt(F>>12&63)+n.charAt(F>>6&63)+n.charAt(F&63);C.push(D)}if(g===1){let E=A[I-1],F=n.charAt(E>>2),D=n.charAt(E<<4&63);C.push(`${F}${D}`),B&&C.push(\"==\")}else if(g===2){let E=(A[I-2]<<8)+A[I-1],F=n.charAt(E>>10),D=n.charAt(E>>4&63),h=n.charAt(E<<2&63);C.push(`${F}${D}${h}`),B&&C.push(\"=\")}return C.join(\"\")}function IA(A){let B=Math.floor(A.length*.75),I=A.length;return A[I-1]===\"=\"&&(B-=1,A[I-2]===\"=\"&&(B-=1)),B}function BA(A){let B=IA(A),I=A.length,g=new Uint8Array(B),C=0;for(let Q=0;Q<I;Q+=4){let E=M[A.charCodeAt(Q)],F=M[A.charCodeAt(Q+1)],D=M[A.charCodeAt(Q+2)],h=M[A.charCodeAt(Q+3)];g[C]=E<<2|F>>4,C+=1,g[C]=(F&15)<<4|D>>2,C+=1,g[C]=(D&3)<<6|h&63,C+=1}return g}var p=16*1024,q=4,gA=new c,X=new Map;function b(A,B){return S(this,void 0,void 0,function*(){let I=null,g=null,C=!1;if(typeof WebAssembly>\"u\")throw new Error(\"WebAssembly is not supported in this environment!\");let Q=(i,o=0)=>{g.set(i,o)},E=()=>g,F=()=>I.exports,D=i=>{I.exports.Hash_SetMemorySize(i);let o=I.exports.Hash_GetBuffer(),w=I.exports.memory.buffer;g=new Uint8Array(w,o,i)},h=()=>new DataView(I.exports.memory.buffer).getUint32(I.exports.STATE_SIZE,!0),k=gA.dispatch(()=>S(this,void 0,void 0,function*(){if(!X.has(A.name)){let o=BA(A.data),w=WebAssembly.compile(o);X.set(A.name,w)}let i=yield X.get(A.name);I=yield WebAssembly.instantiate(i,{})})),e=()=>S(this,void 0,void 0,function*(){I||(yield k);let i=I.exports.Hash_GetBuffer(),o=I.exports.memory.buffer;g=new Uint8Array(o,i,p)}),a=(i=null)=>{C=!0,I.exports.Hash_Init(i)},J=i=>{let o=0;for(;o<i.length;){let w=i.subarray(o,o+p);o+=w.length,g.set(w),I.exports.Hash_Update(w.length)}},G=i=>{if(!C)throw new Error(\"update() called before init()\");let o=d(i);J(o)},s=new Uint8Array(B*2),K=(i,o=null)=>{if(!C)throw new Error(\"digest() called before init()\");return C=!1,I.exports.Hash_Final(o),i===\"binary\"?g.slice(0,B):V(s,g,B)},H=()=>{if(!C)throw new Error(\"save() can only be called after init() and before digest()\");let i=I.exports.Hash_GetState(),o=h(),w=I.exports.memory.buffer,f=new Uint8Array(w,i,o),r=new Uint8Array(q+o);return v(r,A.hash),r.set(f,q),r},Y=i=>{if(!(i instanceof Uint8Array))throw new Error(\"load() expects an Uint8Array generated by save()\");let o=I.exports.Hash_GetState(),w=h(),f=q+w,r=I.exports.memory.buffer;if(i.length!==f)throw new Error(`Bad state length (expected ${f} bytes, got ${i.length})`);if(!AA(A.hash,i.subarray(0,q)))throw new Error(\"This state was written by an incompatible hash implementation\");let T=i.subarray(q);new Uint8Array(r,o,w).set(T),C=!0},N=i=>typeof i==\"string\"?i.length<p/4:i.byteLength<p,t=N;switch(A.name){case\"argon2\":case\"scrypt\":t=()=>!0;break;case\"blake2b\":case\"blake2s\":t=(i,o)=>o<=512&&N(i);break;case\"blake3\":t=(i,o)=>o===0&&N(i);break;case\"xxhash64\":case\"xxhash3\":case\"xxhash128\":case\"crc64\":t=()=>!1;break}let U=(i,o=null,w=null)=>{if(!t(i,o))return a(o),G(i),K(\"hex\",w);let f=d(i);return g.set(f),I.exports.Hash_Calculate(f.length,o,w),V(s,g,B)};return yield e(),{getMemory:E,writeMemory:Q,getExports:F,setMemorySize:D,init:a,update:G,digest:K,save:H,load:Y,calculate:U,hashLength:B}})}var nA=new c;var QA=\"argon2\",CA=\"AGFzbQEAAAABKQVgAX8Bf2AAAX9gEH9/f39/f39/f39/f39/f38AYAR/f39/AGACf38AAwYFAAECAwQFBgEBAoCAAgYIAX8BQZCoBAsHQQQGbWVtb3J5AgASSGFzaF9TZXRNZW1vcnlTaXplAAAOSGFzaF9HZXRCdWZmZXIAAQ5IYXNoX0NhbGN1bGF0ZQAECvEyBVgBAn9BACEBAkAgAEEAKAKICCICRg0AAkAgACACayIAQRB2IABBgIB8cSAASWoiAEAAQX9HDQBB/wHADwtBACEBQQBBACkDiAggAEEQdK18NwOICAsgAcALcAECfwJAQQAoAoAIIgANAEEAPwBBEHQiADYCgAhBACgCiAgiAUGAgCBGDQACQEGAgCAgAWsiAEEQdiAAQYCAfHEgAElqIgBAAEF/Rw0AQQAPC0EAQQApA4gIIABBEHStfDcDiAhBACgCgAghAAsgAAvcDgECfiAAIAQpAwAiECAAKQMAIhF8IBFCAYZC/v///x+DIBBC/////w+DfnwiEDcDACAMIBAgDCkDAIVCIIkiEDcDACAIIBAgCCkDACIRfCARQgGGQv7///8fgyAQQv////8Pg358IhA3AwAgBCAQIAQpAwCFQiiJIhA3AwAgACAQIAApAwAiEXwgEEL/////D4MgEUIBhkL+////H4N+fCIQNwMAIAwgECAMKQMAhUIwiSIQNwMAIAggECAIKQMAIhF8IBBC/////w+DIBFCAYZC/v///x+DfnwiEDcDACAEIBAgBCkDAIVCAYk3AwAgASAFKQMAIhAgASkDACIRfCARQgGGQv7///8fgyAQQv////8Pg358IhA3AwAgDSAQIA0pAwCFQiCJIhA3AwAgCSAQIAkpAwAiEXwgEUIBhkL+////H4MgEEL/////D4N+fCIQNwMAIAUgECAFKQMAhUIoiSIQNwMAIAEgECABKQMAIhF8IBBC/////w+DIBFCAYZC/v///x+DfnwiEDcDACANIBAgDSkDAIVCMIkiEDcDACAJIBAgCSkDACIRfCAQQv////8PgyARQgGGQv7///8fg358IhA3AwAgBSAQIAUpAwCFQgGJNwMAIAIgBikDACIQIAIpAwAiEXwgEUIBhkL+////H4MgEEL/////D4N+fCIQNwMAIA4gECAOKQMAhUIgiSIQNwMAIAogECAKKQMAIhF8IBFCAYZC/v///x+DIBBC/////w+DfnwiEDcDACAGIBAgBikDAIVCKIkiEDcDACACIBAgAikDACIRfCAQQv////8PgyARQgGGQv7///8fg358IhA3AwAgDiAQIA4pAwCFQjCJIhA3AwAgCiAQIAopAwAiEXwgEEL/////D4MgEUIBhkL+////H4N+fCIQNwMAIAYgECAGKQMAhUIBiTcDACADIAcpAwAiECADKQMAIhF8IBFCAYZC/v///x+DIBBC/////w+DfnwiEDcDACAPIBAgDykDAIVCIIkiEDcDACALIBAgCykDACIRfCARQgGGQv7///8fgyAQQv////8Pg358IhA3AwAgByAQIAcpAwCFQiiJIhA3AwAgAyAQIAMpAwAiEXwgEEL/////D4MgEUIBhkL+////H4N+fCIQNwMAIA8gECAPKQMAhUIwiSIQNwMAIAsgECALKQMAIhF8IBBC/////w+DIBFCAYZC/v///x+DfnwiEDcDACAHIBAgBykDAIVCAYk3AwAgACAFKQMAIhAgACkDACIRfCARQgGGQv7///8fgyAQQv////8Pg358IhA3AwAgDyAQIA8pAwCFQiCJIhA3AwAgCiAQIAopAwAiEXwgEUIBhkL+////H4MgEEL/////D4N+fCIQNwMAIAUgECAFKQMAhUIoiSIQNwMAIAAgECAAKQMAIhF8IBBC/////w+DIBFCAYZC/v///x+DfnwiEDcDACAPIBAgDykDAIVCMIkiEDcDACAKIBAgCikDACIRfCAQQv////8PgyARQgGGQv7///8fg358IhA3AwAgBSAQIAUpAwCFQgGJNwMAIAEgBikDACIQIAEpAwAiEXwgEUIBhkL+////H4MgEEL/////D4N+fCIQNwMAIAwgECAMKQMAhUIgiSIQNwMAIAsgECALKQMAIhF8IBFCAYZC/v///x+DIBBC/////w+DfnwiEDcDACAGIBAgBikDAIVCKIkiEDcDACABIBAgASkDACIRfCAQQv////8PgyARQgGGQv7///8fg358IhA3AwAgDCAQIAwpAwCFQjCJIhA3AwAgCyAQIAspAwAiEXwgEEL/////D4MgEUIBhkL+////H4N+fCIQNwMAIAYgECAGKQMAhUIBiTcDACACIAcpAwAiECACKQMAIhF8IBFCAYZC/v///x+DIBBC/////w+DfnwiEDcDACANIBAgDSkDAIVCIIkiEDcDACAIIBAgCCkDACIRfCARQgGGQv7///8fgyAQQv////8Pg358IhA3AwAgByAQIAcpAwCFQiiJIhA3AwAgAiAQIAIpAwAiEXwgEEL/////D4MgEUIBhkL+////H4N+fCIQNwMAIA0gECANKQMAhUIwiSIQNwMAIAggECAIKQMAIhF8IBBC/////w+DIBFCAYZC/v///x+DfnwiEDcDACAHIBAgBykDAIVCAYk3AwAgAyAEKQMAIhAgAykDACIRfCARQgGGQv7///8fgyAQQv////8Pg358IhA3AwAgDiAQIA4pAwCFQiCJIhA3AwAgCSAQIAkpAwAiEXwgEUIBhkL+////H4MgEEL/////D4N+fCIQNwMAIAQgECAEKQMAhUIoiSIQNwMAIAMgECADKQMAIhF8IBBC/////w+DIBFCAYZC/v///x+DfnwiEDcDACAOIBAgDikDAIVCMIkiEDcDACAJIBAgCSkDACIRfCAQQv////8PgyARQgGGQv7///8fg358IhA3AwAgBCAQIAQpAwCFQgGJNwMAC98aAQN/QQAhBEEAIAIpAwAgASkDAIU3A5AIQQAgAikDCCABKQMIhTcDmAhBACACKQMQIAEpAxCFNwOgCEEAIAIpAxggASkDGIU3A6gIQQAgAikDICABKQMghTcDsAhBACACKQMoIAEpAyiFNwO4CEEAIAIpAzAgASkDMIU3A8AIQQAgAikDOCABKQM4hTcDyAhBACACKQNAIAEpA0CFNwPQCEEAIAIpA0ggASkDSIU3A9gIQQAgAikDUCABKQNQhTcD4AhBACACKQNYIAEpA1iFNwPoCEEAIAIpA2AgASkDYIU3A/AIQQAgAikDaCABKQNohTcD+AhBACACKQNwIAEpA3CFNwOACUEAIAIpA3ggASkDeIU3A4gJQQAgAikDgAEgASkDgAGFNwOQCUEAIAIpA4gBIAEpA4gBhTcDmAlBACACKQOQASABKQOQAYU3A6AJQQAgAikDmAEgASkDmAGFNwOoCUEAIAIpA6ABIAEpA6ABhTcDsAlBACACKQOoASABKQOoAYU3A7gJQQAgAikDsAEgASkDsAGFNwPACUEAIAIpA7gBIAEpA7gBhTcDyAlBACACKQPAASABKQPAAYU3A9AJQQAgAikDyAEgASkD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\",iA=\"e4cdc523\",EA={name:QA,data:CA,hash:iA},oA=\"blake2b\",FA=\"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\",cA=\"c6f286e6\",DA={name:oA,data:FA,hash:cA},GA=new c;function W(A){return!Number.isInteger(A)||A<8||A>512||A%8!==0?new Error(\"Invalid variant! Valid values: 8, 16, ..., 512\"):null}function hA(A,B){return A|B<<16}function Z(A=512,B=null){if(W(A))return Promise.reject(W(A));let I=null,g=A;if(B!==null){if(I=d(B),I.length>64)return Promise.reject(new Error(\"Max key length is 64 bytes\"));g=hA(A,I.length)}let C=A/8;return b(DA,C).then(Q=>{g>512&&Q.writeMemory(I),Q.init(g);let E={init:g>512?()=>(Q.writeMemory(I),Q.init(g),E):()=>(Q.init(g),E),update:F=>(Q.update(F),E),digest:F=>Q.digest(F),save:()=>Q.save(),load:F=>(Q.load(F),E),blockSize:128,digestSize:C};return E})}function aA(A,B,I){let g=[`m=${B.memorySize}`,`t=${B.iterations}`,`p=${B.parallelism}`].join(\",\");return`$argon2${B.hashType}$v=19${g}${x(A,!1)}${x(I,!1)}`}var O=new DataView(new ArrayBuffer(4));function y(A){return O.setInt32(0,A,!0),new Uint8Array(O.buffer)}function u(A,B,I){return S(this,void 0,void 0,function*(){if(I<=64){let D=yield Z(I*8);return D.update(y(I)),D.update(B),D.digest(\"binary\")}let g=Math.ceil(I/32)-2,C=new Uint8Array(I);A.init(),A.update(y(I)),A.update(B);let Q=A.digest(\"binary\");C.set(Q.subarray(0,32),0);for(let D=1;D<g;D++)A.init(),A.update(Q),Q=A.digest(\"binary\"),C.set(Q.subarray(0,32),D*32);let E=I-32*g,F;return E===64?(F=A,F.init()):F=yield Z(E*8),F.update(Q),Q=F.digest(\"binary\"),C.set(Q.subarray(0,E),g*32),C})}function wA(A){switch(A){case\"d\":return 0;case\"i\":return 1;default:return 2}}function kA(A){return S(this,void 0,void 0,function*(){var B;let{parallelism:I,iterations:g,hashLength:C}=A,Q=d(A.password),E=d(A.salt),F=19,D=wA(A.hashType),{memorySize:h}=A,k=d((B=A.secret)!==null&&B!==void 0?B:\"\"),[e,a]=yield Promise.all([b(EA,1024),Z(512)]);e.setMemorySize(h*1024+1024);let J=new Uint8Array(24),G=new DataView(J.buffer);G.setInt32(0,I,!0),G.setInt32(4,C,!0),G.setInt32(8,h,!0),G.setInt32(12,g,!0),G.setInt32(16,F,!0),G.setInt32(20,D,!0),e.writeMemory(J,h*1024),a.init(),a.update(J),a.update(y(Q.length)),a.update(Q),a.update(y(E.length)),a.update(E),a.update(y(k.length)),a.update(k),a.update(y(0));let K=Math.floor(h/(I*4))*4,H=new Uint8Array(72),Y=a.digest(\"binary\");H.set(Y);for(let U=0;U<I;U++){H.set(y(0),64),H.set(y(U),68);let i=U*K,o=yield u(a,H,1024);e.writeMemory(o,i*1024),i+=1,H.set(y(1),64),o=yield u(a,H,1024),e.writeMemory(o,i*1024)}let N=new Uint8Array(1024);v(N,e.calculate(new Uint8Array([]),h));let t=yield u(a,N,C);if(A.outputType===\"hex\"){let U=new Uint8Array(C*2);return V(U,t,C)}return A.outputType===\"encoded\"?aA(E,A,t):t})}var eA=A=>{var B;if(!A||typeof A!=\"object\")throw new Error(\"Invalid options parameter. It requires an object.\");if(!A.password)throw new Error(\"Password must be specified\");if(A.password=d(A.password),A.password.length<1)throw new Error(\"Password must be specified\");if(!A.salt)throw new Error(\"Salt must be specified\");if(A.salt=d(A.salt),A.salt.length<8)throw new Error(\"Salt should be at least 8 bytes long\");if(A.secret=d((B=A.secret)!==null&&B!==void 0?B:\"\"),!Number.isInteger(A.iterations)||A.iterations<1)throw new Error(\"Iterations should be a positive number\");if(!Number.isInteger(A.parallelism)||A.parallelism<1)throw new Error(\"Parallelism should be a positive number\");if(!Number.isInteger(A.hashLength)||A.hashLength<4)throw new Error(\"Hash length should be at least 4 bytes.\");if(!Number.isInteger(A.memorySize))throw new Error(\"Memory size should be specified.\");if(A.memorySize<8*A.parallelism)throw new Error(\"Memory size should be at least 8 * parallelism.\");if(A.outputType===void 0&&(A.outputType=\"hex\"),![\"hex\",\"binary\",\"encoded\"].includes(A.outputType))throw new Error(`Insupported output type ${A.outputType}. Valid values: ['hex', 'binary', 'encoded']`)};function j(A){return S(this,void 0,void 0,function*(){return eA(A),kA(Object.assign(Object.assign({},A),{hashType:\"id\"}))})}var tA=new c;var yA=new c;var dA=new c;var HA=new c;var UA=new Uint8Array(8);var fA=new c;var SA=new c;var NA=new c;var JA=new c;var rA=new c;var qA=new c;var MA=new c;var KA=new c;var pA=new c;var sA=new c;var YA=new c;var RA=new Uint8Array(8);var lA=new c;var XA=new Uint8Array(8);var uA=new c;var zA=new Uint8Array(8);var VA=new c;var ZA=new c;var mA=new c;self.onmessage=async A=>{let B=new Uint8Array(A.data),I;try{I=await j({password:B,salt:new TextEncoder().encode(\"PixelWallet\"),parallelism:1,iterations:3,memorySize:65536,hashLength:32,outputType:\"binary\"}),self.postMessage(I.buffer,[I.buffer])}catch{self.postMessage({error:!0})}finally{B.fill(0),I&&I.byteLength&&I.fill(0),self.close()}};})();\n/*! Bundled license information:\n\nhash-wasm/dist/index.esm.js:\n  (*!\n   * hash-wasm (https://www.npmjs.com/package/hash-wasm)\n   * (c) Dani Biro\n   * @license MIT\n   *)\n*/\n";
+let activeDerivation=null,mapJob=null,mapEpoch=0;
+function cancelDerivation(){if(activeDerivation)activeDerivation();activeDerivation=null;mapJob=null;mapEpoch++;}
+function deriveMapKey(password){
+ const bytes=new TextEncoder().encode(password.normalize('NFKD'));
+ return new Promise((resolve,reject)=>{
+  let worker,url,done=false;
+  const finish=(key,error)=>{if(done)return;done=true;if(worker)worker.terminate();if(url)URL.revokeObjectURL(url);if(bytes.byteLength)bytes.fill(0);if(activeDerivation===cancel)activeDerivation=null;if(error)reject(error);else resolve(key);};
+  const cancel=()=>finish(null);activeDerivation=cancel;
+  try{url=URL.createObjectURL(new Blob([ARGON_WORKER_SOURCE],{type:'text/javascript'}));worker=new Worker(url);
+   worker.onmessage=event=>{if(event.data instanceof ArrayBuffer)finish(new Uint8Array(event.data));else finish(null,new Error('Argon2id failed'));};
+   worker.onerror=()=>finish(null,new Error('Argon2id unavailable'));
+   worker.postMessage(bytes.buffer,[bytes.buffer]);
+  }catch(error){finish(null,error);}
+ });
+}
+function shuffle(key){
+ const data=new Uint8Array(36);data.set(key);
+ let counter=0,block=null,index=8;
+ function next(){
+  if(index===8){if(block)new Uint8Array(block.buffer,block.byteOffset,block.byteLength).fill(0);new DataView(data.buffer).setUint32(32,counter++);const bytes=sha256(data);block=new DataView(bytes.buffer,bytes.byteOffset,bytes.byteLength);index=0;}
+  return block.getUint32(index++*4);
+ }
+ try{const a=WORDS.map((_,i)=>i);for(let i=a.length-1;i>0;i--){const n=i+1,limit=Math.floor(4294967296/n)*n;let v;do{v=next();}while(v>=limit);const j=v%n;[a[i],a[j]]=[a[j],a[i]];}return a;}
+ finally{key.fill(0);data.fill(0);if(block)new Uint8Array(block.buffer,block.byteOffset,block.byteLength).fill(0);}
+}
+// Zero padding is part of the PixelWallet generation format.
+function complete(indices,count){
+ if(![12,18,24].includes(count)||indices.length!==count-1||indices.some(i=>!Number.isInteger(i)||i<0||i>2047))throw Error('Invalid pattern');
+ const ent=count*32/3;
+ const prefix=indices.map(i=>i.toString(2).padStart(11,'0')).join('').padEnd(ent,'0');
+ const entropy=Uint8Array.from(prefix.match(/.{8}/g),b=>parseInt(b,2));
+ try{return PixelWalletCrypto.entropyToMnemonic(entropy,WORDS).split(' ').map(word=>WORD_INDEX.get(word));}finally{entropy.fill(0);}
+}
+function validate(indices){
+ if(![12,18,24].includes(indices.length)||indices.some(i=>!Number.isInteger(i)||i<0||i>2047))return false;
+ return PixelWalletCrypto.validateMnemonic(indices.map(i=>WORDS[i]).join(' '),WORDS);
+}
+const $=id=>document.getElementById(id);let mapping=null,selected=[],count=12,hidden=false,focusIndex=0;
+const canvas=$('grid'),ctx=canvas.getContext('2d'),SIZE=24;
+const base=document.createElement('canvas');base.width=1536;base.height=768;const bg=base.getContext('2d');
+bg.fillStyle='#fafbf6';bg.fillRect(0,0,1536,768);bg.strokeStyle='#dbe1d1';bg.lineWidth=1;bg.beginPath();for(let x=0;x<=1536;x+=SIZE){bg.moveTo(x+.5,0);bg.lineTo(x+.5,768);}for(let y=0;y<=768;y+=SIZE){bg.moveTo(0,y+.5);bg.lineTo(1536,y+.5);}bg.stroke();
+function frameRects(){return [0,12,24].map(inset=>inset===0?[1,1,1534,766]:[inset*SIZE,inset/2*SIZE,(64-inset*2)*SIZE,(32-inset)*SIZE]);}
+function orderedSelected(){return selected.slice().sort((a,b)=>a-b);}
+function draw(){ctx.drawImage(base,0,0);orderedSelected().forEach(i=>{const x=i%64*SIZE,y=Math.floor(i/64)*SIZE;ctx.fillStyle='#2859db';ctx.fillRect(x+1,y+1,SIZE-1,SIZE-1);});ctx.strokeStyle='#c65348';ctx.lineWidth=Math.max(2,1536/(canvas.clientWidth||1536));for(const [x,y,w,h] of frameRects())ctx.strokeRect(x,y,w,h);if(document.activeElement===canvas){ctx.strokeStyle='#17291c';ctx.lineWidth=2;ctx.strokeRect(focusIndex%64*SIZE+2,Math.floor(focusIndex/64)*SIZE+2,20,20);}}
+function render(){$('copy').textContent='Скопировать фразу';$('copyStatus').textContent='';$('copyPanel').hidden=true;$('copyText').value='';$('manualCopy').hidden=true;draw();const indices=mapping?orderedSelected().map(i=>mapping[i]):[];let result=indices,valid=false;if(indices.length===count-1){result=complete(indices,count);valid=validate(result);}$('words').replaceChildren();for(let i=0;i<count;i++){const item=document.createElement('div');item.className='word'+(i===count-1?' auto':'');const number=document.createElement('em');number.textContent=String(i+1).padStart(2,'0');item.append(number,document.createTextNode(result[i]===undefined?'—':hidden?'••••':WORDS[result[i]]));$('words').append(item);}$('progress').textContent=selected.length+' из '+(count-1)+' ячеек';$('progress').classList.toggle('complete',valid);$('clear').disabled=!selected.length;$('downloadMap').disabled=!selected.length;$('copy').disabled=!valid;$('reveal').textContent=hidden?'Показать слова':'Скрыть слова';}
+$('downloadMap').onclick=()=>{
+ if(!selected.length)return;
+ const output=document.createElement('canvas');output.width=1536;output.height=768;
+ const pen=output.getContext('2d');pen.drawImage(base,0,0);
+ orderedSelected().forEach(i=>{pen.fillStyle='#2859db';pen.fillRect(i%64*SIZE+1,Math.floor(i/64)*SIZE+1,SIZE-1,SIZE-1);});
+ pen.strokeStyle='#c65348';pen.lineWidth=2;
+ for(const [x,y,w,h] of frameRects())pen.strokeRect(x,y,w,h);
+ output.toBlob(blob=>{
+  if(!blob){$('notice').textContent='Не удалось сохранить карту. Попробуйте ещё раз.';return;}
+  const url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download='PixelWallet-map.png';document.body.append(link);link.click();link.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),30000);
+ },'image/png');
+};
+async function choose(i){if(!mapping&&!await generateMap())return;const at=selected.indexOf(i);if(at>=0)selected.splice(at,1);else if(selected.length<count-1)selected.push(i);else{$('notice').textContent='Паттерн завершён. Уберите точку, чтобы выбрать другую.';return;}$('notice').textContent='';render();}
+function cellAt(e){const r=canvas.getBoundingClientRect();if(!r.width||!r.height)return -1;const x=Math.floor((e.clientX-r.left)/r.width*64),y=Math.floor((e.clientY-r.top)/r.height*32);return x>=0&&x<64&&y>=0&&y<32?y*64+x:-1;}
+let stroke=null,suppressClick=false;
+// Integer line traversal fills cells skipped between pointer events.
+function lineCells(from,to){let x=from%64,y=Math.floor(from/64);const tx=to%64,ty=Math.floor(to/64),dx=Math.abs(tx-x),dy=-Math.abs(ty-y),sx=x<tx?1:-1,sy=y<ty?1:-1;let error=dx+dy;const out=[];for(;;){out.push(y*64+x);if(x===tx&&y===ty)break;const e=2*error;if(e>=dy){error+=dy;x+=sx;}if(e<=dx){error+=dx;y+=sy;}}return out;}
+function paintTo(i){if(!stroke||i<0)return;if(!mapping){stroke.pending.push(i);return;}const path=stroke.last===null?[i]:lineCells(stroke.last,i);let changed=false;for(const cell of path){if(stroke.visited.has(cell))continue;stroke.visited.add(cell);const at=selected.indexOf(cell);if(stroke.erase){if(at>=0){selected.splice(at,1);changed=true;}}else if(at<0){if(selected.length<count-1){selected.push(cell);changed=true;}else $('notice').textContent='Достигнут лимит '+(count-1)+' ячеек. Начните движение с синей ячейки, чтобы стирать.';}}stroke.last=i;focusIndex=i;if(changed)render();}
+canvas.onpointerdown=async e=>{if(e.isPrimary===false||(e.pointerType==='mouse'&&e.button!==0))return;const i=cellAt(e);if(i<0)return;e.preventDefault();suppressClick=true;canvas.focus({preventScroll:true});canvas.setPointerCapture(e.pointerId);const current={id:e.pointerId,last:null,erase:selected.includes(i),visited:new Set(),pending:[]};stroke=current;
+ if(!mapping){current.pending.push(i);if(!await generateMap())return;const queued=current.pending.flatMap((cell,index,list)=>index?lineCells(list[index-1],cell):[cell]);for(const cell of queued){const at=selected.indexOf(cell);if(current.erase){if(at>=0)selected.splice(at,1);}else if(at<0&&selected.length<count-1)selected.push(cell);}current.last=current.pending[current.pending.length-1];current.pending=null;render();}
+ else{$('notice').textContent='';paintTo(i);}
+};
+canvas.onpointermove=e=>{const i=cellAt(e);if(stroke){if(e.pointerId!==stroke.id)return;e.preventDefault();if(i<0){stroke.last=null;return;}paintTo(i);}};
+function endStroke(e){if(!stroke||e.pointerId!==stroke.id)return;if(e.type==='pointerup'){const i=cellAt(e);if(i>=0)paintTo(i);}const id=stroke.id;stroke=null;if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);}
+canvas.onpointerup=endStroke;canvas.onpointercancel=endStroke;canvas.onlostpointercapture=e=>{if(stroke&&e.pointerId===stroke.id)stroke=null;};
+canvas.onclick=e=>{if(suppressClick){suppressClick=false;return;}const i=cellAt(e);if(i>=0){focusIndex=i;choose(i);}};
+canvas.onfocus=draw;canvas.onblur=draw;
+canvas.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(focusIndex);return;}const delta={ArrowRight:1,ArrowLeft:-1,ArrowDown:64,ArrowUp:-64}[e.key];if(delta!==undefined){e.preventDefault();focusIndex=Math.max(0,Math.min(2047,focusIndex+delta));draw();}};
+function invalidate(){cancelDerivation();canvas.setAttribute('aria-busy','false');stroke=null;suppressClick=false;if(mapping)mapping.fill(0);selected.fill(0);mapping=null;selected=[];render();}
+function generateMap(){
+ if(mapping)return Promise.resolve(true);
+ if(mapJob)return mapJob;
+ if(!$('password').value){$('notice').textContent='Введите пароль над картой.';$('password').focus();return Promise.resolve(false);}
+ const epoch=mapEpoch;$('notice').textContent='Расчёт карты…';canvas.setAttribute('aria-busy','true');
+ const job=(async()=>{let key;
+  try{key=await deriveMapKey($('password').value);if(!key||epoch!==mapEpoch)return false;mapping=shuffle(key);selected=[];$('notice').textContent='';render();return true;}
+  catch{if(epoch===mapEpoch)$('notice').textContent='Не удалось рассчитать Argon2id. Нужны WebAssembly и 64 МиБ свободной памяти. Попробуйте другой браузер.';return false;}
+  finally{if(key)key.fill(0);if(epoch===mapEpoch){mapJob=null;canvas.setAttribute('aria-busy','false');}}
+ })();mapJob=job;return job;
+}
+$('form').addEventListener('submit',e=>{e.preventDefault();if(!mapping)generateMap();});
+
+$('password').addEventListener('input',()=>{invalidate();});
+$('show').onclick=()=>{const shown=$('password').type==='password';$('password').type=shown?'text':'password';$('show').setAttribute('aria-label',shown?'Скрыть пароль':'Показать пароль');$('show').setAttribute('aria-pressed',String(shown));};
+for(const n of [12,18,24])$('mode'+n).onclick=()=>{if(count===n)return;cancelDerivation();canvas.setAttribute('aria-busy','false');stroke=null;count=n;selected=[];for(const m of [12,18,24]){$('mode'+m).classList.toggle('active',m===n);$('mode'+m).setAttribute('aria-pressed',String(m===n));}$('modeHint').textContent=(n-1)+' точек + 1 автоматическое слово';$('notice').textContent='';render();};
+$('clear').onclick=()=>{cancelDerivation();stroke=null;selected=[];$('notice').textContent='';render();};$('reveal').onclick=()=>{hidden=!hidden;render();};
+
+function phraseText(){if(!mapping||selected.length!==count-1)return null;const indices=complete(orderedSelected().map(i=>mapping[i]),count);return validate(indices)?indices.map(i=>WORDS[i]).join(' '):null;}
+function selectCopyText(text){
+ $('copyText').value=text;$('copyPanel').hidden=false;
+ $('copyText').focus({preventScroll:true});$('copyText').select();$('copyText').setSelectionRange(0,text.length);
+}
+function legacyCopy(text){
+ // Run synchronously during the click. A fallback after awaiting a rejected
+ // Clipboard API promise can lose the browser's user-activation permission.
+ const previous=document.activeElement;selectCopyText(text);let copied=false;
+ try{copied=typeof document.execCommand==='function'&&document.execCommand('copy');}catch{}
+ if(copied){$('copyPanel').hidden=true;$('copyText').value='';if(previous&&previous.focus)previous.focus({preventScroll:true});}
+ return copied;
+}
+$('manualCopy').onclick=()=>{const phrase=phraseText();if(!phrase)return;selectCopyText(phrase);$('copyStatus').textContent='Фраза выделена. Скопируйте её сочетанием клавиш или через меню телефона.';};
+$('copy').onclick=async()=>{
+ const phrase=phraseText();if(!phrase)return;
+ if(!window.confirm('Сид-фраза будет записана в системный буфер обмена. ОС и менеджеры буфера могут сохранить её историю или синхронизировать её с другими устройствами. PixelWallet не может удалить эти копии. Продолжить?'))return;
+ $('copyStatus').textContent='';$('copy').textContent='Копирование…';$('manualCopy').hidden=true;
+ let copied=legacyCopy(phrase);
+ if(typeof navigator!=='undefined'&&navigator.clipboard&&typeof navigator.clipboard.writeText==='function'){
+  try{await navigator.clipboard.writeText(phrase);copied=true;}catch{copied=false;}
+ }
+ if(phraseText()!==phrase)return;
+ if(copied){$('copyPanel').hidden=true;$('copyText').value='';$('manualCopy').hidden=true;$('copyStatus').textContent='';$('copy').textContent='Фраза скопирована';}
+ else{$('copy').textContent='Скопировать фразу';$('manualCopy').hidden=false;selectCopyText(phrase);$('copyStatus').textContent='Автоматическое копирование недоступно. Фраза выделена для ручного копирования.';}
+};
+
+$('wipe').onclick=()=>{count=12;for(const n of [12,18,24]){$('mode'+n).classList.toggle('active',n===12);$('mode'+n).setAttribute('aria-pressed',String(n===12));}$('modeHint').textContent='11 точек + 1 автоматическое слово';$('password').value='';$('password').type='password';$('show').setAttribute('aria-label','Показать пароль');$('show').setAttribute('aria-pressed','false');invalidate();$('notice').textContent='';};render();
+function repaint(){if(window.requestAnimationFrame)window.requestAnimationFrame(draw);else draw();}
+window.addEventListener('resize',repaint);
+window.addEventListener('pageshow',repaint);
+repaint();
+
+
+// Responsive viewport controls. Cell indices and crypto are shared across layouts.
+const mobileMedia=window.matchMedia('(max-width:760px)');
+const mapViewport=canvas.parentElement.parentElement,mapSurface=canvas.parentElement;
+const zoomSteps=[1,2,3,4,6,8];let viewZoom=1,moveMode=true,pan=null,ignorePanClick=false;
+function updateView(zoom,reset=false){
+ const r=canvas.getBoundingClientRect(),v=mapViewport.getBoundingClientRect();
+ const cx=r.width?Math.max(0,Math.min(1,(v.left+mapViewport.clientWidth/2-r.left)/r.width)):0.5;
+ const cy=r.height?Math.max(0,Math.min(1,(v.top+mapViewport.clientHeight/2-r.top)/r.height)):0.5;
+ viewZoom=zoom;mapViewport.classList.toggle('is-zoomed',zoom>1);
+ const width=mapViewport.clientWidth*zoom;mapSurface.style.width=width+'px';mapSurface.style.flexShrink='0';
+ if(zoom>1){mapViewport.scrollLeft=reset?0:cx*width-mapViewport.clientWidth/2;mapViewport.scrollTop=reset?0:cy*width/2-mapViewport.clientHeight/2;}else{mapViewport.scrollLeft=0;mapViewport.scrollTop=0;}
+ $('zoomLevel').textContent='×'+zoom;$('zoomOut').disabled=zoom===1;$('zoomIn').disabled=zoom===8;draw();
+}
+function setViewMode(move){stroke=null;moveMode=move;canvas.style.cursor=move?'grab':'crosshair';$('drawMode').setAttribute('aria-pressed',String(!move));$('moveMode').setAttribute('aria-pressed',String(move));$('mobileHint').textContent=move?'Перетаскивайте карту. Выбранные ячейки не меняются.':'Ведите пальцем для рисования. Начните на синей ячейке, чтобы стирать.';}
+function changeZoom(zoom){updateView(zoom);setViewMode(moveMode);}
+$('zoomIn').onclick=()=>changeZoom(zoomSteps[Math.min(zoomSteps.length-1,zoomSteps.indexOf(viewZoom)+1)]);
+$('zoomOut').onclick=()=>changeZoom(zoomSteps[Math.max(0,zoomSteps.indexOf(viewZoom)-1)]);
+$('fitMap').onclick=()=>{updateView(1,true);setViewMode(true);};
+$('drawMode').onclick=()=>setViewMode(false);
+$('moveMode').onclick=()=>setViewMode(true);
+const drawPointerDown=canvas.onpointerdown,drawPointerMove=canvas.onpointermove,drawPointerUp=canvas.onpointerup,drawPointerCancel=canvas.onpointercancel,drawLostCapture=canvas.onlostpointercapture,drawClick=canvas.onclick,drawKeydown=canvas.onkeydown;
+canvas.onpointerdown=e=>{if(!moveMode)return drawPointerDown(e);if(e.isPrimary===false||(e.pointerType==='mouse'&&e.button!==0))return;e.preventDefault();canvas.focus({preventScroll:true});canvas.setPointerCapture(e.pointerId);pan={id:e.pointerId,x:e.clientX,y:e.clientY,left:mapViewport.scrollLeft,top:mapViewport.scrollTop};ignorePanClick=true;canvas.style.cursor='grabbing';};
+canvas.onpointermove=e=>{if(pan){if(e.pointerId!==pan.id)return;e.preventDefault();mapViewport.scrollLeft=pan.left-(e.clientX-pan.x);mapViewport.scrollTop=pan.top-(e.clientY-pan.y);return;}if(!moveMode)drawPointerMove(e);};
+function finishPan(e){if(!pan||e.pointerId!==pan.id)return false;const id=pan.id;pan=null;canvas.style.cursor='grab';if(canvas.hasPointerCapture(id))canvas.releasePointerCapture(id);return true;}
+canvas.onpointerup=e=>{if(!finishPan(e)&&!moveMode)drawPointerUp(e);};
+canvas.onpointercancel=e=>{if(!finishPan(e))drawPointerCancel(e);};
+canvas.onlostpointercapture=e=>{if(pan&&pan.id===e.pointerId){pan=null;canvas.style.cursor='grab';}drawLostCapture(e);};
+canvas.onclick=e=>{if(ignorePanClick){ignorePanClick=false;return;}if(moveMode)return;drawClick(e);};
+canvas.onkeydown=e=>{if(!moveMode){drawKeydown(e);if(viewZoom>1){const unit=mapSurface.getBoundingClientRect().width/64,x=(focusIndex%64)*unit,y=Math.floor(focusIndex/64)*unit;if(x<mapViewport.scrollLeft)mapViewport.scrollLeft=x;else if(x+unit>mapViewport.scrollLeft+mapViewport.clientWidth)mapViewport.scrollLeft=x+unit-mapViewport.clientWidth;if(y<mapViewport.scrollTop)mapViewport.scrollTop=y;else if(y+unit>mapViewport.scrollTop+mapViewport.clientHeight)mapViewport.scrollTop=y+unit-mapViewport.clientHeight;}return;}const delta={ArrowLeft:[-40,0],ArrowRight:[40,0],ArrowUp:[0,-40],ArrowDown:[0,40]}[e.key];if(delta){e.preventDefault();mapViewport.scrollLeft+=delta[0];mapViewport.scrollTop+=delta[1];}};
+const originalWipe=$('wipe').onclick;$('wipe').onclick=()=>{pan=null;ignorePanClick=false;originalWipe();updateView(1,true);setViewMode(mobileMedia.matches);};
+function applyResponsiveLayout(){
+ const pointerId=pan?pan.id:stroke?stroke.id:null;pan=null;stroke=null;ignorePanClick=false;
+ if(pointerId!==null&&canvas.hasPointerCapture(pointerId))canvas.releasePointerCapture(pointerId);
+ document.body.classList.toggle('mobile-layout',mobileMedia.matches);
+ updateView(1,true);setViewMode(mobileMedia.matches);
+}
+if(mobileMedia.addEventListener)mobileMedia.addEventListener('change',applyResponsiveLayout);else mobileMedia.addListener(applyResponsiveLayout);
+window.addEventListener('resize',()=>updateView(viewZoom));
+applyResponsiveLayout();
+// Best-effort cleanup; browser/OS memory erasure cannot be guaranteed.
+window.addEventListener('pagehide',()=>{$('wipe').onclick();});
+window.addEventListener('pageshow',event=>{if(event.persisted)$('wipe').onclick();});
+$('startupStatus').hidden=true;
+
+/* hash-wasm 4.12.0
+MIT License
+
+Copyright (c) 2020 Dani Biró
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Embedded C implementations might use other, similarly permissive licenses.
+Check the beginning of the files from the /src directory.
+
+Special thank you to the authors of original C algorithms:
+- Alexander Peslyak <solar@openwall.com>
+- Aleksey Kravchenko <rhash.admin@gmail.com>
+- Colin Percival
+- Stephan Brumme <create@stephan-brumme.com>
+- Steve Reid <steve@edmweb.com>
+- Samuel Neves <sneves@dei.uc.pt>
+- Solar Designer <solar@openwall.com>
+- Project Nayuki
+- ARM Limited
+- Yanbo Li dreamfly281@gmail.com, goldboar@163.comYanbo Li
+- Mark Adler
+- Yann Collet
+
+Argon2 implementation based on Go crypto; written for hash-wasm by Dani Biró.
+BLAKE2 reference implementation: Copyright 2012 Samuel Neves; used under CC0 1.0.
+https://creativecommons.org/publicdomain/zero/1.0/
+*/
+
+/* Third-party MIT license notices
+
+@scure/bip39
+The MIT License (MIT)
+
+Copyright (c) 2022 Patricio Palladino, Paul Miller (paulmillr.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+@noble/hashes
+The MIT License (MIT)
+
+Copyright (c) 2022 Paul Miller (https://paulmillr.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+@scure/base
+The MIT License (MIT)
+
+Copyright (c) 2022 Paul Miller (https://paulmillr.com)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the “Software”), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+*/
+</script></body></html>
