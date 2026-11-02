@@ -74,8 +74,8 @@ The resulting seed phrase can be used in a compatible wallet. Keep any additiona
 | Password preparation | Unicode NFKD → UTF-8 |
 | Key derivation | Argon2id 1.3 |
 | Public salt | `PixelWallet`, UTF-8 |
-| Argon2id memory | 65,536 KiB |
-| Passes | 3 |
+| Argon2id memory | 131,072 KiB |
+| Passes | 15 |
 | Parallelism | 1 |
 | Key length | 32 bytes |
 
