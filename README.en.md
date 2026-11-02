@@ -1,5 +1,7 @@
 # PixelWallet
 
+![PixelWallet — Your seed phrase, in your memory](assets/cover-en.png)
+
 **The key to your wallet — in your memory.**
 
 [Русский](README.md) · English
@@ -106,7 +108,7 @@ The libraries are embedded in the HTML file. Their license notices are preserved
 
 ## File integrity
 
-`SHA256SUMS` contains checksums for the application, both README files, and the license. To verify them on macOS or Linux:
+`SHA256SUMS` contains checksums for the application, both README files, the cover images, and the license. To verify them on macOS or Linux:
 
 ```sh
 shasum -a 256 -c SHA256SUMS

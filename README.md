@@ -1,5 +1,7 @@
 # PixelWallet
 
+![PixelWallet — SEED-фраза у вас в памяти](assets/cover-ru.png)
+
 **Ключ к кошельку — у вас в памяти.**
 
 Русский · [English](README.en.md)
@@ -99,7 +101,7 @@ PixelWallet помогает организовать решение триле�
 
 ## Целостность файлов
 
-`SHA256SUMS` содержит контрольные суммы приложения, обоих README и лицензии. Проверка в macOS или Linux:
+`SHA256SUMS` содержит контрольные суммы приложения, обоих README, обложек и лицензии. Проверка в macOS или Linux:
 
 ```sh
 shasum -a 256 -c SHA256SUMS
