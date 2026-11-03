@@ -1,5 +1,7 @@
 # PixelWallet
 
+**[Try PixelWallet](https://timebtc.github.io/PixelWallet/PixelWallet.html)**
+
 ![PixelWallet — Your seed phrase, in your memory](assets/cover-en.png)
 
 **The key to your wallet — in your memory.**
