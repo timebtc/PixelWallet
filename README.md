@@ -1,5 +1,7 @@
 # PixelWallet
 
+**[Открыть PixelWallet](https://timebtc.github.io/PixelWallet/PixelWallet.html)**
+
 ![PixelWallet — SEED-фраза у вас в памяти](assets/cover-ru.png)
 
 **Ключ к кошельку — у вас в памяти.**
