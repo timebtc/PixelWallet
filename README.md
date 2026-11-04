@@ -1,122 +1,127 @@
 # PixelWallet
 
-**[Открыть PixelWallet](https://timebtc.github.io/PixelWallet/PixelWallet.html)**
+**[Try PixelWallet](https://timebtc.github.io/PixelWallet/PixelWallet.html)**
 
-![PixelWallet — SEED-фраза у вас в памяти](assets/cover-ru.png)
+![PixelWallet — Your seed phrase, in your memory](assets/cover-en.png)
 
-**Ключ к кошельку — у вас в памяти.**
+**The key to your wallet — in your memory.**
 
-Русский · [English](README.en.md)
+[Русский](README.ru.md) · English
 
-PixelWallet создаёт сид-фразу BIP39 из пароля и рисунка на карте. Пароль определяет расположение слов, выбранные ячейки — их набор. Последнее слово рассчитывается автоматически.
+PixelWallet generates a BIP39 seed phrase from a password and a visual pattern drawn on a 64×32 grid. The password determines the word layout; the selected cells determine which words are used. Everything runs 100% offline in a single HTML file.
 
-Приложение представляет собой один HTML-файл со встроенными библиотеками и словарём. Вычисления выполняются локально в браузере.
+## The seed phrase trilemma
 
-## Трилемма сид-фразы
+A seed phrase lets you recover the keys to a cryptocurrency wallet. Keeping it safe involves three competing goals:
 
-Сид-фраза даёт возможность восстановить ключи криптовалютного кошелька. Её хранение требует совместить три задачи:
+- Keep access for yourself.
+- Keep recovery information away from other people.
+- Make access available to your family if something happens to you.
 
-- Не потерять доступ самому.
-- Защитить данные восстановления от посторонних.
-- Предусмотреть передачу доступа близким.
+This tension is often described as the seed phrase trilemma. A carefully hidden backup may be difficult for family members to find. An accessible record may also be discovered by someone else. And a list of random words is hard to remember accurately over many years.
 
-Эти задачи часто называют «трилеммой сид-фразы». Слишком хорошо спрятанную копию трудно найти семье. Доступную запись проще обнаружить посторонним. А список случайных слов сложно надолго удержать в памяти без ошибок.
+## How PixelWallet helps
 
-## Как помогает PixelWallet
+PixelWallet separates the information used to generate a seed phrase into **a password and a visual pattern**. Instead of memorizing a sequence of random words, you remember text and the positions of selected cells. The application retrieves the words and calculates the final word, including the checksum.
 
-PixelWallet разделяет данные, из которых получается сид-фраза, на **пароль и визуальный рисунок**. Вместо запоминания последовательности случайных слов человек запоминает текст и расположение выбранных ячеек. Программа формирует слова и автоматически рассчитывает последнее слово с контрольной суммой.
+You can keep the pattern separately from the password. The exported image does not contain the seed phrase itself: recovery also requires the password, phrase length, and a copy of PixelWallet using the same algorithm. This lets you distribute recovery information across separate locations.
 
-Рисунок можно сохранить отдельно от пароля. В изображении нет готовой сид-фразы: чтобы получить её, нужны также пароль, длина фразы и PixelWallet с тем же алгоритмом. Так данные восстановления можно распределить между разными местами хранения.
+For family members, you can prepare instructions explaining how to obtain both parts. Keep the application HTML file and phrase length with the recovery plan. This supports inheritance planning without putting the complete seed phrase in a single record.
 
-Для близких можно заранее подготовить инструкцию и порядок получения обеих частей. Вместе с ними нужно сохранить HTML-файл приложения и длину фразы. Это позволяет спланировать передачу доступа, не оставляя всю готовую сид-фразу в одной записи.
+**You can remember the information needed to access your cryptocurrency as a password and a pattern.** The cryptocurrency remains on the blockchain; what you remember is a way to recover access.
 
-**Данные для доступа к криптовалюте можно держать в голове — как пароль и рисунок.** Сама криптовалюта остаётся в блокчейне, а в памяти хранится способ восстановить доступ к ней.
+PixelWallet helps you manage the trilemma, but it does not remove the need for a recovery plan. Forgetting the password or reproducing the pattern incorrectly can cause loss of access. Test recovery and the arrangements for your family in advance.
 
-PixelWallet помогает организовать решение трилеммы, но сохранность данных зависит от выбранного способа хранения. Забытый пароль или неточно повторённый рисунок могут привести к потере доступа, поэтому восстановление и порядок передачи близким нужно проверить заранее.
+## Usage
 
-## Использование
+1. Download `PixelWallet.html` and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
+2. Enter a password and choose a phrase length: 12, 18, or 24 words.
+3. Select 11, 17, or 23 cells respectively. You can select individual cells or draw continuously.
+4. The resulting phrase appears below the grid.
 
-Переключатель **RU / EN** в шапке меняет язык интерфейса, сообщений и описаний. Пароль, рисунок и фраза при этом сохраняются. Словарь BIP39 остаётся английским.
+Cells are read from top to bottom, and from left to right within each row. The order in which you select cells does not affect word order. Starting a stroke on a selected cell switches that stroke to erasing.
 
-1. Скачайте `PixelWallet.html` и откройте его в браузере с поддержкой JavaScript, WebAssembly и Web Workers.
-2. Введите пароль и выберите длину фразы: 12, 18 или 24 слова.
-3. Отметьте соответственно 11, 17 или 23 ячейки. Можно нажимать на отдельные ячейки или рисовать непрерывно.
-4. Готовая фраза появится под картой.
+On a phone, the pencil enables drawing and the hand enables panning. The “+” and “−” buttons adjust zoom; the four-corner button fits the entire grid into view.
 
-Ячейки читаются сверху вниз, в каждой строке — слева направо. Порядок нажатий не влияет на порядок слов. Движение с выбранной ячейки стирает точки.
+Use **RU / EN** in the header to switch the interface, messages, and documentation between Russian and English. Switching languages preserves the current password, pattern, and phrase. The BIP39 word list remains English.
 
-На телефоне карандаш включает рисование, ладонь — перемещение карты. Кнопки «+» и «−» меняют масштаб, кнопка с четырьмя уголками возвращает обзор всей карты.
+Main controls:
 
-«Скачать карту · PNG» сохраняет изображение рисунка. «Скопировать фразу» переносит слова в системный буфер обмена после подтверждения. «Сбросить» очищает рисунок, «Очистить сеанс» — пароль, карту и рисунок, возвращая длину к 12 словам.
-
-## Восстановление
-
-Для получения той же фразы нужны:
-
-- точный пароль;
-- тот же набор выбранных ячеек;
-- та же длина фразы;
-- PixelWallet с той же версией алгоритма.
-
-Сохраните используемый HTML-файл. Проверьте восстановление в новом сеансе и сравните каждое слово. Изображение PNG служит образцом рисунка и не содержит пароль или длину фразы.
-
-Полученную сид-фразу можно использовать в совместимом кошельке. Дополнительную passphrase и параметры восстановления кошелька, если они используются, сохраняют отдельно.
-
-## Алгоритм
-
-| Параметр | Значение |
+| Control | Action |
 |---|---|
-| Карта | 64 × 32 ячейки |
-| Словарь | Английский BIP39, 2048 слов |
-| Подготовка пароля | Unicode NFKD → UTF-8 |
-| Выработка ключа | Argon2id 1.3 |
-| Публичная соль | `PixelWallet`, UTF-8 |
-| Память Argon2id | 131072 КиБ |
-| Проходы | 15 |
-| Параллелизм | 1 |
-| Длина ключа | 32 байта |
+| Download grid · PNG | Download an image of the pattern |
+| Copy phrase | Copy the phrase to the system clipboard after confirmation |
+| Reset | Clear the pattern |
+| Clear session | Clear the password, grid, and pattern, and reset phrase length to 12 words |
 
-Слова перемешиваются алгоритмом Fisher–Yates с отбрасыванием значений для устранения смещения. Поток чисел строится через SHA-256 от ключа и четырёхбайтового счётчика big-endian, начиная с нуля.
+## Recovery
 
-Индексы выбранных ячеек сортируются по возрастанию. Индексы соответствующих слов записываются по 11 бит и дополняются справа 7, 5 или 3 нулями для фраз из 12, 18 или 24 слов. Полученные байты кодируются по BIP39 с добавлением контрольной суммы.
+To reproduce the same phrase, you need:
 
-Формулы и контрольный пример приведены в разделе «Техническая часть» приложения. Изменение алгоритма или его параметров меняет результат восстановления.
+- the exact password;
+- the same set of selected cells;
+- the same phrase length;
+- PixelWallet with the same algorithm version.
 
-## Безопасность
+Keep the HTML file you use. Test recovery in a new session and compare every word. The PNG image serves as a pattern reference and does not contain the password or phrase length.
 
-Код приложения не отправляет введённые данные на сервер и не записывает их в браузерные хранилища. Пароль, карта и фраза находятся в памяти во время работы. Очистка сеанса не гарантирует стирание всех копий из памяти браузера или ОС.
+The resulting seed phrase can be used in a compatible wallet. Keep any additional BIP39 passphrase and wallet recovery settings separately if you use them.
 
-Скопированная фраза может остаться в истории системного буфера или попасть в его синхронизацию. Изображение PNG раскрывает рисунок; храните его отдельно от пароля.
+## Algorithm
 
-Стойкость зависит от непредсказуемости пароля и рисунка. Argon2id увеличивает стоимость перебора, но не устраняет риск слабых исходных данных. Контрольная сумма BIP39 проверяет формат фразы, а не безопасность всей схемы.
+| Parameter | Value |
+|---|---|
+| Grid | 64 × 32 cells |
+| Word list | English BIP39, 2,048 words |
+| Password preparation | Unicode NFKD → UTF-8 |
+| Key derivation | Argon2id 1.3 |
+| Public salt | `PixelWallet`, UTF-8 |
+| Argon2id memory | 131,072 KiB |
+| Passes | 15 |
+| Parallelism | 1 |
+| Key length | 32 bytes |
 
-Используйте доверенное устройство и проверенную копию приложения. Публикация исходного кода не является независимым аудитом безопасности.
+Words are shuffled using Fisher–Yates with rejection sampling to avoid modulo bias. The number stream is generated using SHA-256 of the key followed by a four-byte big-endian counter, starting at zero.
 
-## Зависимости
+Selected cell indices are sorted in ascending order. The corresponding word indices are represented as 11-bit values and padded on the right with 7, 5, or 3 zero bits for 12-, 18-, or 24-word phrases respectively. The resulting entropy bytes are encoded as a BIP39 mnemonic with its checksum.
 
-| Библиотека | Версия | Назначение |
+Formulas and a test vector are provided in the application's «Техническая часть» section. Changing the algorithm or its parameters changes the recovery result.
+
+## Security
+
+The application code does not send entered data to a server or write it to browser storage. The password, grid, and phrase remain in memory during use. Clearing a session does not guarantee that every copy is erased from browser or operating system memory.
+
+A copied phrase may remain in clipboard history or be synchronized by the operating system. A PNG image reveals the pattern; keep it separately from the password.
+
+Security depends on how unpredictable the password and pattern are. Argon2id makes guessing more expensive, but cannot compensate for weak inputs. A valid BIP39 checksum checks the phrase format, not the security of the complete scheme.
+
+Use a trusted device and a verified copy of the application. Publishing source code does not constitute an independent security audit.
+
+## Dependencies
+
+| Library | Version | Purpose |
 |---|---|---|
 | `hash-wasm` | 4.12.0 | Argon2id / WebAssembly |
-| `@scure/bip39` | 2.0.1 | BIP39 и словарь |
+| `@scure/bip39` | 2.0.1 | BIP39 and word list |
 | `@noble/hashes` | 2.0.1 | SHA-256 |
-| `@scure/base` | 2.0.0 | Вспомогательное кодирование |
+| `@scure/base` | 2.0.0 | Encoding utilities |
 
-Библиотеки встроены в HTML. Их лицензионные уведомления сохранены в конце скрипта.
+The libraries are embedded in the HTML file. Their license notices are preserved at the end of the script.
 
-## Целостность файлов
+## File integrity
 
-`SHA256SUMS` содержит контрольные суммы приложения, обоих README, обложек и лицензии. Проверка в macOS или Linux:
+`SHA256SUMS` contains checksums for the application, both README files, the cover images, and the license. To verify them on macOS or Linux:
 
 ```sh
 shasum -a 256 -c SHA256SUMS
 ```
 
-Контрольные суммы проверяют совпадение файлов с доверенной копией комплекта, но сами по себе не подтверждают безопасность программы или подлинность автора.
+Checksums establish whether files match a trusted copy of the package. By themselves, they do not establish software security or author identity.
 
-## Лицензия
+## License
 
-Собственный код и документация PixelWallet предоставлены на условиях [CC0 1.0 Universal](LICENSE) в пределах прав, которыми можно распорядиться. Их можно свободно использовать, изменять и распространять, включая коммерческое использование. Упоминание автора идеи приветствуется и не является обязательным условием.
+PixelWallet's original code and documentation are released under [CC0 1.0 Universal](LICENSE), to the extent that the relevant rights can be waived. You may use, modify, and distribute them freely, including commercially. Credit for the idea is appreciated but is not a license requirement.
 
-Лицензии и уведомления авторов встроенных библиотек сохраняют силу.
+The licenses and notices of the bundled libraries remain in effect.
 
-**Идея и концепция — [timebtc](https://github.com/timebtc).**
+**Idea and concept — [timebtc](https://github.com/timebtc).**
