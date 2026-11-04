@@ -45,14 +45,16 @@ Cells are read from top to bottom, and from left to right within each row. The o
 
 On a phone, the pencil enables drawing and the hand enables panning. The “+” and “−” buttons adjust zoom; the four-corner button fits the entire grid into view.
 
-The interface is currently in Russian. Its main controls are:
+Use **RU / EN** in the header to switch the interface, messages, and documentation between Russian and English. Switching languages preserves the current password, pattern, and phrase. The BIP39 word list remains English.
+
+Main controls:
 
 | Control | Action |
 |---|---|
-| «Скачать карту · PNG» | Download an image of the pattern |
-| «Скопировать фразу» | Copy the phrase to the system clipboard after confirmation |
-| «Сбросить» | Clear the pattern |
-| «Очистить сеанс» | Clear the password, grid, and pattern, and reset phrase length to 12 words |
+| Download grid · PNG | Download an image of the pattern |
+| Copy phrase | Copy the phrase to the system clipboard after confirmation |
+| Reset | Clear the pattern |
+| Clear session | Clear the password, grid, and pattern, and reset phrase length to 12 words |
 
 ## Recovery
 
