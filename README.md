@@ -1,14 +1,54 @@
-# PixelWallet
+<h1 align="center">PixelWallet</h1>
 
-**[Try PixelWallet](https://timebtc.github.io/PixelWallet/PixelWallet.html)**
+<p align="center"><strong>The key to your wallet — in your memory.</strong></p>
 
-![PixelWallet — Your seed phrase, in your memory](assets/cover-en.png)
+<p align="center"><a href="https://timebtc.github.io/PixelWallet/PixelWallet.html"><strong>Try PixelWallet</strong></a> &nbsp; · &nbsp; <a href="https://github.com/timebtc/PixelWallet/raw/refs/heads/main/PixelWallet.html"><strong>Download HTML</strong></a> &nbsp; · &nbsp; <a href="README.ru.md"><strong>Русский</strong></a></p>
 
-**The key to your wallet — in your memory.**
+<p align="center">
+  <img src="https://img.shields.io/badge/format-BIP39-0057ff?style=flat-square" alt="BIP39 format">
+  <img src="https://img.shields.io/badge/app-single_HTML-0057ff?style=flat-square" alt="Single HTML file">
+  <img src="https://img.shields.io/badge/interface-EN_%2F_RU-0057ff?style=flat-square" alt="English and Russian">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC0_1.0-0057ff?style=flat-square" alt="CC0 1.0 license"></a>
+</p>
 
-[Русский](README.ru.md) · English
+![PixelWallet — The key to your wallet — in your memory.](assets/cover-en.png)
 
 PixelWallet generates a BIP39 seed phrase from a password and a visual pattern drawn on a 64×32 grid. The password determines the word layout; the selected cells determine which words are used. Everything runs 100% offline in a single HTML file.
+
+[Quick start](#quick-start) · [The idea](#the-seed-phrase-trilemma) · [Recovery](#recovery) · [Algorithm](#algorithm) · [Security](#security) · [FAQ](#faq)
+
+---
+
+## At a glance
+
+| Remember and recover | Use the tool |
+|---|---|
+| A password and pattern instead of memorizing a word list | One self-contained HTML file |
+| 12-, 18-, or 24-word phrases | English and Russian interface |
+| Automatically calculated final word | Draw with a mouse or touch |
+| Reproducible output from the same inputs | Download the pattern as PNG |
+
+## Quick start
+
+1. Download [PixelWallet.html](https://github.com/timebtc/PixelWallet/raw/refs/heads/main/PixelWallet.html) and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
+2. Enter a password and choose a phrase length: 12, 18, or 24 words.
+3. Select 11, 17, or 23 cells respectively. You can select individual cells or draw continuously.
+4. The resulting phrase appears below the grid.
+
+Cells are read from top to bottom, and from left to right within each row. The order in which you select cells does not affect word order. Starting a stroke on a selected cell switches that stroke to erasing.
+
+On a phone, the pencil enables drawing and the hand enables panning. The “+” and “−” buttons adjust zoom; the four-corner button fits the entire grid into view.
+
+Use **RU / EN** in the header to switch the interface, messages, and documentation between Russian and English. Switching languages preserves the current password, pattern, and phrase. The BIP39 word list remains English.
+
+Main controls:
+
+| Control | Action |
+|---|---|
+| Download grid · PNG | Download an image of the pattern |
+| Copy phrase | Copy the phrase to the system clipboard after confirmation |
+| Reset | Clear the pattern |
+| Clear session | Clear the password, grid, and pattern, and reset phrase length to 12 words |
 
 ## The seed phrase trilemma
 
@@ -32,28 +72,6 @@ For family members, you can prepare instructions explaining how to obtain both p
 
 PixelWallet helps you manage the trilemma, but it does not remove the need for a recovery plan. Forgetting the password or reproducing the pattern incorrectly can cause loss of access. Test recovery and the arrangements for your family in advance.
 
-## Usage
-
-1. Download [PixelWallet.html](https://github.com/timebtc/PixelWallet/raw/refs/heads/main/PixelWallet.html) and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
-2. Enter a password and choose a phrase length: 12, 18, or 24 words.
-3. Select 11, 17, or 23 cells respectively. You can select individual cells or draw continuously.
-4. The resulting phrase appears below the grid.
-
-Cells are read from top to bottom, and from left to right within each row. The order in which you select cells does not affect word order. Starting a stroke on a selected cell switches that stroke to erasing.
-
-On a phone, the pencil enables drawing and the hand enables panning. The “+” and “−” buttons adjust zoom; the four-corner button fits the entire grid into view.
-
-Use **RU / EN** in the header to switch the interface, messages, and documentation between Russian and English. Switching languages preserves the current password, pattern, and phrase. The BIP39 word list remains English.
-
-Main controls:
-
-| Control | Action |
-|---|---|
-| Download grid · PNG | Download an image of the pattern |
-| Copy phrase | Copy the phrase to the system clipboard after confirmation |
-| Reset | Clear the pattern |
-| Clear session | Clear the password, grid, and pattern, and reset phrase length to 12 words |
-
 ## Recovery
 
 To reproduce the same phrase, you need:
@@ -68,6 +86,9 @@ Keep the HTML file you use. Test recovery in a new session and compare every wor
 The resulting seed phrase can be used in a compatible wallet. Keep any additional BIP39 passphrase and wallet recovery settings separately if you use them.
 
 ## Algorithm
+
+<details>
+<summary>Parameters and generation rules</summary>
 
 | Parameter | Value |
 |---|---|
@@ -87,6 +108,8 @@ Selected cell indices are sorted in ascending order. The corresponding word indi
 
 Formulas and a test vector are provided in the application's “Technical details” section. Changing the algorithm or its parameters changes the recovery result.
 
+</details>
+
 ## Security
 
 The application code does not send entered data to a server or write it to browser storage. The password, grid, and phrase remain in memory during use. Clearing a session does not guarantee that every copy is erased from browser or operating system memory.
@@ -99,6 +122,9 @@ Use a trusted device and a verified copy of the application. Publishing source c
 
 ## Dependencies
 
+<details>
+<summary>Bundled libraries</summary>
+
 | Library | Version | Purpose |
 |---|---|---|
 | `hash-wasm` | 4.12.0 | Argon2id / WebAssembly |
@@ -107,6 +133,8 @@ Use a trusted device and a verified copy of the application. Publishing source c
 | `@scure/base` | 2.0.0 | Encoding utilities |
 
 The libraries are embedded in the HTML file. Their license notices are preserved at the end of the script.
+
+</details>
 
 ## File integrity
 
@@ -117,6 +145,33 @@ shasum -a 256 -c SHA256SUMS
 ```
 
 Checksums establish whether files match a trusted copy of the package. By themselves, they do not establish software security or author identity.
+
+## FAQ
+
+<details>
+<summary>Do I need an internet connection?</summary>
+
+The downloaded HTML file works offline. Opening the hosted website initially requires a connection.
+
+</details>
+
+<details>
+<summary>What do I need for recovery?</summary>
+
+The exact password, pattern, phrase length, and an HTML file using the same algorithm version. Test recovery in a new session first.
+
+</details>
+
+<details>
+<summary>Does switching languages change my phrase?</summary>
+
+No. RU / EN changes only the interface and documentation. The grid, selected cells, and phrase stay the same.
+
+</details>
+
+## Feedback
+
+Found a bug or want to discuss the method? [Open an issue](https://github.com/timebtc/PixelWallet/issues). Use only test data in reports and examples.
 
 ## License
 
