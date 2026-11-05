@@ -7,7 +7,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/format-BIP39-0057ff?style=flat-square" alt="BIP39 format">
   <img src="https://img.shields.io/badge/app-single_HTML-0057ff?style=flat-square" alt="Single HTML file">
-  <img src="https://img.shields.io/badge/interface-EN_%2F_RU-0057ff?style=flat-square" alt="English and Russian">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC0_1.0-0057ff?style=flat-square" alt="CC0 1.0 license"></a>
 </p>
 
