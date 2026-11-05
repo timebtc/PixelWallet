@@ -34,7 +34,7 @@ PixelWallet helps you manage the trilemma, but it does not remove the need for a
 
 ## Usage
 
-1. Download `PixelWallet.html` and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
+1. Download [PixelWallet.html](https://github.com/timebtc/PixelWallet/raw/refs/heads/main/PixelWallet.html) and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
 2. Enter a password and choose a phrase length: 12, 18, or 24 words.
 3. Select 11, 17, or 23 cells respectively. You can select individual cells or draw continuously.
 4. The resulting phrase appears below the grid.
@@ -85,7 +85,7 @@ Words are shuffled using Fisher–Yates with rejection sampling to avoid modulo 
 
 Selected cell indices are sorted in ascending order. The corresponding word indices are represented as 11-bit values and padded on the right with 7, 5, or 3 zero bits for 12-, 18-, or 24-word phrases respectively. The resulting entropy bytes are encoded as a BIP39 mnemonic with its checksum.
 
-Formulas and a test vector are provided in the application's «Техническая часть» section. Changing the algorithm or its parameters changes the recovery result.
+Formulas and a test vector are provided in the application's “Technical details” section. Changing the algorithm or its parameters changes the recovery result.
 
 ## Security
 
