@@ -1,8 +1,8 @@
-<h1 align="center">PixelWallet</h1>
+<h1 align="center">PatternSeed</h1>
 
 <p align="center"><strong>The key to your wallet — in your memory.</strong></p>
 
-<p align="center"><a href="https://timebtc.github.io/PixelWallet/PixelWallet.html"><strong>Try PixelWallet</strong></a> &nbsp; · &nbsp; <a href="https://github.com/timebtc/PixelWallet/raw/refs/heads/main/PixelWallet.html"><strong>Download HTML</strong></a> &nbsp; · &nbsp; <a href="README.ru.md"><strong>Русский</strong></a></p>
+<p align="center"><a href="https://timebtc.github.io/PatternSeed/PatternSeed.html"><strong>Try PatternSeed</strong></a> &nbsp; · &nbsp; <a href="https://github.com/timebtc/PatternSeed/raw/refs/heads/main/PatternSeed.html"><strong>Download HTML</strong></a> &nbsp; · &nbsp; <a href="README.ru.md"><strong>Русский</strong></a></p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/format-BIP39-0057ff?style=flat-square" alt="BIP39 format">
@@ -10,9 +10,9 @@
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-CC0_1.0-0057ff?style=flat-square" alt="CC0 1.0 license"></a>
 </p>
 
-![PixelWallet — The key to your wallet — in your memory.](assets/cover-en.png)
+![PatternSeed — The key to your wallet — in your memory.](assets/cover-en.png)
 
-PixelWallet generates a BIP39 seed phrase from a password and a visual pattern drawn on a 64×32 grid. The password determines the word layout; the selected cells determine which words are used. Everything runs 100% offline in a single HTML file.
+PatternSeed generates a BIP39 seed phrase from a password and a visual pattern drawn on a 64×32 grid. The password determines the word layout; the selected cells determine which words are used. Everything runs 100% offline in a single HTML file.
 
 [Quick start](#quick-start) · [The idea](#the-seed-phrase-trilemma) · [Recovery](#recovery) · [Algorithm](#algorithm) · [Security](#security) · [FAQ](#faq)
 
@@ -29,7 +29,7 @@ PixelWallet generates a BIP39 seed phrase from a password and a visual pattern d
 
 ## Quick start
 
-1. Download [PixelWallet.html](https://github.com/timebtc/PixelWallet/raw/refs/heads/main/PixelWallet.html) and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
+1. Download [PatternSeed.html](https://github.com/timebtc/PatternSeed/raw/refs/heads/main/PatternSeed.html) and open it in a browser that supports JavaScript, WebAssembly, and Web Workers.
 2. Enter a password and choose a phrase length: 12, 18, or 24 words.
 3. Select 11, 17, or 23 cells respectively. You can select individual cells or draw continuously.
 4. The resulting phrase appears below the grid.
@@ -59,17 +59,17 @@ A seed phrase lets you recover the keys to a cryptocurrency wallet. Keeping it s
 
 This tension is often described as the seed phrase trilemma. A carefully hidden backup may be difficult for family members to find. An accessible record may also be discovered by someone else. And a list of random words is hard to remember accurately over many years.
 
-## How PixelWallet helps
+## How PatternSeed helps
 
-PixelWallet separates the information used to generate a seed phrase into **a password and a visual pattern**. Instead of memorizing a sequence of random words, you remember text and the positions of selected cells. The application retrieves the words and calculates the final word, including the checksum.
+PatternSeed separates the information used to generate a seed phrase into **a password and a visual pattern**. Instead of memorizing a sequence of random words, you remember text and the positions of selected cells. The application retrieves the words and calculates the final word, including the checksum.
 
-You can keep the pattern separately from the password. The exported image does not contain the seed phrase itself: recovery also requires the password, phrase length, and a copy of PixelWallet using the same algorithm. This lets you distribute recovery information across separate locations.
+You can keep the pattern separately from the password. The exported image does not contain the seed phrase itself: recovery also requires the password, phrase length, and a copy of PatternSeed using the same algorithm. This lets you distribute recovery information across separate locations.
 
 For family members, you can prepare instructions explaining how to obtain both parts. Keep the application HTML file and phrase length with the recovery plan. This supports inheritance planning without putting the complete seed phrase in a single record.
 
 **You can remember the information needed to access your cryptocurrency as a password and a pattern.** The cryptocurrency remains on the blockchain; what you remember is a way to recover access.
 
-PixelWallet helps you manage the trilemma, but it does not remove the need for a recovery plan. Forgetting the password or reproducing the pattern incorrectly can cause loss of access. Test recovery and the arrangements for your family in advance.
+PatternSeed helps you manage the trilemma, but it does not remove the need for a recovery plan. Forgetting the password or reproducing the pattern incorrectly can cause loss of access. Test recovery and the arrangements for your family in advance.
 
 ## Recovery
 
@@ -78,7 +78,7 @@ To reproduce the same phrase, you need:
 - the exact password;
 - the same set of selected cells;
 - the same phrase length;
-- PixelWallet with the same algorithm version.
+- PatternSeed with the same algorithm version.
 
 Keep the HTML file you use. Test recovery in a new session and compare every word. The PNG image serves as a pattern reference and does not contain the password or phrase length.
 
@@ -95,7 +95,7 @@ The resulting seed phrase can be used in a compatible wallet. Keep any additiona
 | Word list | English BIP39, 2,048 words |
 | Password preparation | Unicode NFKD → UTF-8 |
 | Key derivation | Argon2id 1.3 |
-| Public salt | `PixelWallet`, UTF-8 |
+| Public salt | SHA-256(UTF-8(`timebtc`)), 32 raw bytes |
 | Argon2id memory | 131,072 KiB |
 | Passes | 15 |
 | Parallelism | 1 |
@@ -170,11 +170,11 @@ No. RU / EN changes only the interface and documentation. The grid, selected cel
 
 ## Feedback
 
-Found a bug or want to discuss the method? [Open an issue](https://github.com/timebtc/PixelWallet/issues). Use only test data in reports and examples.
+Found a bug or want to discuss the method? [Open an issue](https://github.com/timebtc/PatternSeed/issues). Use only test data in reports and examples.
 
 ## License
 
-PixelWallet's original code and documentation are released under [CC0 1.0 Universal](LICENSE), to the extent that the relevant rights can be waived. You may use, modify, and distribute them freely, including commercially. Credit for the idea is appreciated but is not a license requirement.
+PatternSeed's original code and documentation are released under [CC0 1.0 Universal](LICENSE), to the extent that the relevant rights can be waived. You may use, modify, and distribute them freely, including commercially. Credit for the idea is appreciated but is not a license requirement.
 
 The licenses and notices of the bundled libraries remain in effect.
 
