@@ -12,7 +12,7 @@
 
 ![PatternSeed — The key to your wallet — in your memory.](assets/cover-en.png)
 
-PatternSeed generates a BIP39 seed phrase from a password and a visual pattern drawn on a 64×32 grid. The password determines the word layout; the selected cells determine which words are used. Everything runs 100% offline in a single HTML file.
+PatternSeed generates a BIP39 seed phrase from a password and a visual pattern drawn on a 64×32 grid. The password determines the word layout; the selected cells determine which words are used. All calculations run locally in a single self-contained HTML file. Once downloaded, the file works without an internet connection.
 
 [Quick start](#quick-start) · [The idea](#the-seed-phrase-trilemma) · [Recovery](#recovery) · [Algorithm](#algorithm) · [Security](#security) · [FAQ](#faq)
 
@@ -82,7 +82,7 @@ To reproduce the same phrase, you need:
 
 Keep the HTML file you use. Test recovery in a new session and compare every word. The PNG image serves as a pattern reference and does not contain the password or phrase length.
 
-The resulting seed phrase can be used in a compatible wallet. Keep any additional BIP39 passphrase and wallet recovery settings separately if you use them.
+PatternSeed reproduces the phrase; a compatible wallet uses that phrase to recover keys and addresses. Keep any additional BIP39 passphrase and wallet recovery settings separately if you use them.
 
 ## Algorithm
 
@@ -95,11 +95,13 @@ The resulting seed phrase can be used in a compatible wallet. Keep any additiona
 | Word list | English BIP39, 2,048 words |
 | Password preparation | Unicode NFKD → UTF-8 |
 | Key derivation | Argon2id 1.3 |
-| Public salt | SHA-256(UTF-8(`timebtc`)), 32 raw bytes |
+| Public salt | 32 raw bytes; hex: `175313be2569ec3570bcca06592fe6503575d6cb40887733fb26c21f95a4e364` |
 | Argon2id memory | 131,072 KiB |
 | Passes | 15 |
 | Parallelism | 1 |
 | Key length | 32 bytes |
+
+The fixed public salt is a SHA-256 digest used as bytes, not hexadecimal text.
 
 Words are shuffled using Fisher–Yates with rejection sampling to avoid modulo bias. The number stream is generated using SHA-256 of the key followed by a four-byte big-endian counter, starting at zero.
 
@@ -115,7 +117,7 @@ The application code does not send entered data to a server or write it to brows
 
 A copied phrase may remain in clipboard history or be synchronized by the operating system. A PNG image reveals the pattern; keep it separately from the password.
 
-Security depends on how unpredictable the password and pattern are. Argon2id makes guessing more expensive, but cannot compensate for weak inputs. A valid BIP39 checksum checks the phrase format, not the security of the complete scheme.
+Security depends on how unpredictable the password and pattern are. Argon2id increases the cost of deriving each password’s grid; multiple patterns can then be checked against that grid. It cannot compensate for weak inputs. A valid BIP39 checksum checks the phrase format, not the security of the complete scheme.
 
 Use a trusted device and a verified copy of the application. Publishing source code does not constitute an independent security audit.
 
@@ -157,7 +159,7 @@ The downloaded HTML file works offline. Opening the hosted website initially req
 <details>
 <summary>What do I need for recovery?</summary>
 
-The exact password, pattern, phrase length, and an HTML file using the same algorithm version. Test recovery in a new session first.
+The same password, selected cells, phrase length, and a saved HTML file using the same algorithm. See [Recovery](#recovery) for the steps.
 
 </details>
 
